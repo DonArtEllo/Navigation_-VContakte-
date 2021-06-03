@@ -145,7 +145,12 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - SetupViews
     fileprivate func setupViews() {
+        
+        #if DEBUG
+        contentView.backgroundColor = .systemPink
+        #else
         contentView.backgroundColor = .systemGray6
+        #endif
         
         contentView.addSubview(avatarImageView)
         contentView.addSubview(fullNameLabel)
