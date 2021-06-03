@@ -25,28 +25,35 @@ private enum Section {
     }
 }
 
-struct ProfilePagePost {
-    let author: String
-    let description: String
-    let image: String
-    var likes: Int
-    var views: Int
+public struct ProfilePagePost {
+    public let author: String
+    public let description: String
+    public let image: String
+    public var likes: Int
+    public var views: Int
 }
 
-struct ProfilePage {
-    var avatar: UIImage
-    let fullName: String
-    let postsOnProfilePage: [ProfilePagePost]
+public struct ProfilePage {
+    public var avatar: UIImage
+    public let fullName: String
+    public let postsOnProfilePage: [ProfilePagePost]
+    
+    public init(avatar: UIImage, fullName: String, postsOnProfilePage: [ProfilePagePost]) {
+        
+        self.avatar = avatar
+        self.fullName = fullName
+        self.postsOnProfilePage = postsOnProfilePage
+    }
 }
 
-struct Photo {
-    let image: String
+public struct Photo {
+    public let image: String
 }
 
-struct Storage {
+public struct Storage {
     
     // MARK: Profile Page Posts Data
-    static let postsTabel = [
+    public static let postsTabel = [
         ProfilePage(
             avatar: #imageLiteral(resourceName: "cat"),
             fullName: "Hacker Kitten",
@@ -84,7 +91,7 @@ struct Storage {
     ]
     
     //MARK: Photos Data
-    static let photosTabel = [
+    public static let photosTabel = [
         Photo(
             image: "0"
         ),
