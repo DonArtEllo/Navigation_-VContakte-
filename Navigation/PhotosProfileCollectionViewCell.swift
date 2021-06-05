@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PhotosProfileCollectionViewCell: UICollectionViewCell {
     
