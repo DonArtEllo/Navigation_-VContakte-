@@ -8,6 +8,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileTableViewCell: UITableViewCell {
         
@@ -136,6 +137,34 @@ class ProfileTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate(constraints)
         
+    }
+    
+    internal func motionBlurMe(image: UIImage, blurRadius: Double) {
+        let processor = ImageProcessor()
+        processor.processImage(sourceImage: image, filter: .motionBlur(radius: blurRadius)) { resultImage in
+            postContentImage.image = resultImage
+        }
+    }
+    
+    internal func invertMe(image: UIImage) {
+        let processor = ImageProcessor()
+        processor.processImage(sourceImage: image, filter: .colorInvert) { resultImage in
+            postContentImage.image = resultImage
+        }
+    }
+    
+    internal func bloomMe(image: UIImage, bloomIntensity: Double) {
+        let processor = ImageProcessor()
+        processor.processImage(sourceImage: image, filter: .bloom(intensity: bloomIntensity)) { resultImage in
+            postContentImage.image = resultImage
+        }
+    }
+    
+    internal func fadeMe(image: UIImage, bloomIntensity: Double) {
+        let processor = ImageProcessor()
+        processor.processImage(sourceImage: image, filter: .fade) { resultImage in
+            postContentImage.image = resultImage
+        }
     }
     
 }

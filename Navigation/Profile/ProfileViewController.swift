@@ -371,6 +371,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             postsSectionTableViewCell.post = post
             
+            if indexPath.row == 0 {
+                postsSectionTableViewCell.invertMe(image: UIImage(imageLiteralResourceName: post.image))
+                return postsSectionTableViewCell
+            }
+            
+            if indexPath.row == 1 {
+                postsSectionTableViewCell.motionBlurMe(image: UIImage(imageLiteralResourceName: post.image), blurRadius: Double(indexPath.row) * 5)
+                return postsSectionTableViewCell
+            }
+            
+            if indexPath.row == 2 {
+                postsSectionTableViewCell.bloomMe(image: UIImage(imageLiteralResourceName: post.image), bloomIntensity: Double(indexPath.row))
+                return postsSectionTableViewCell
+            }
+            
+            if indexPath.row == 3 {
+                postsSectionTableViewCell.fadeMe(image: UIImage(imageLiteralResourceName: post.image), bloomIntensity: Double(indexPath.row) * 10)
+                return postsSectionTableViewCell
+            }
+            
             return postsSectionTableViewCell
         }
     }
