@@ -166,7 +166,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         avatarImageView.snp.makeConstraints { make in
             make.width.height.equalTo(contentView.snp.width).multipliedBy(0.3)
             make.top.equalTo(contentView).offset(16)
-            make.leading.equalTo(contentView).offset(16)
+            make.leading.equalTo(contentView).offset(16).priority(750)
         }
         
         fullNameLabel.snp.makeConstraints { make in
@@ -187,7 +187,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         }
         
         setStatusButton.snp.makeConstraints { make in
-            make.width.equalTo(contentView).offset(-32)
+            make.width.equalTo(contentView).offset(-32).priority(750)
             make.height.equalTo(50)
             make.top.equalTo(avatarImageView.snp.bottom).offset(48)
             make.leading.equalTo(contentView).offset(16)

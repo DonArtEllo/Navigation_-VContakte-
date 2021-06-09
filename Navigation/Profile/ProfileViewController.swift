@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
     
     private let headerView = ProfileTableHeaderView()
     
+    private let asyncProcessor = ProfileAsyncProcessor()
+    
     private var fullscreenBackgroundView: UIView = {
         let fullscreenBackgroundView = UIView()
         fullscreenBackgroundView.backgroundColor = .black
@@ -371,26 +373,27 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             postsSectionTableViewCell.post = post
             
-            if indexPath.row == 0 {
-                postsSectionTableViewCell.invertMe(image: UIImage(imageLiteralResourceName: post.image))
-                return postsSectionTableViewCell
-            }
+            // MARK: New logic with cache
+            let identifier = indexPath.row
+            postsSectionTableViewCell.representedIdentifier = identifier
             
-            if indexPath.row == 1 {
-                postsSectionTableViewCell.motionBlurMe(image: UIImage(imageLiteralResourceName: post.image), blurRadius: Double(indexPath.row) * 5)
-                return postsSectionTableViewCell
+            if (asyncProcessor.processedImages[identifier] != nil) {
+                postsSectionTableViewCell.configure(with: asyncProcessor.processedImages[identifier]!)
+            } else {
+                asyncProcessor.process(for: identifier) { image in
+                    guard let image = image else {
+                        return
+                    }
+                    // check identifier
+                    guard postsSectionTableViewCell.representedIdentifier == identifier else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        postsSectionTableViewCell.configure(with: image)
+                    }
+                }
             }
-            
-            if indexPath.row == 2 {
-                postsSectionTableViewCell.bloomMe(image: UIImage(imageLiteralResourceName: post.image), bloomIntensity: Double(indexPath.row))
-                return postsSectionTableViewCell
-            }
-            
-            if indexPath.row == 3 {
-                postsSectionTableViewCell.fadeMe(image: UIImage(imageLiteralResourceName: post.image), bloomIntensity: Double(indexPath.row) * 10)
-                return postsSectionTableViewCell
-            }
-            
             return postsSectionTableViewCell
         }
     }
