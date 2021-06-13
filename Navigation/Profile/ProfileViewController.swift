@@ -13,8 +13,10 @@ class ProfileViewController: UIViewController {
     
     private var userNotLoggedInMark = true
     private var animationWasShownMark = true
-    private var logInViewController = LogInViewController()
     private let reusedID = "cellID"
+    
+    private let userName: String
+    private let userService: UserService
     
     private let profilePostsTableView = UITableView(frame: .zero, style: .grouped)
     
@@ -33,7 +35,6 @@ class ProfileViewController: UIViewController {
     
     private var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
-        avatarImageView.image = #imageLiteral(resourceName: "cat")
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.clipsToBounds = true
             
@@ -57,6 +58,22 @@ class ProfileViewController: UIViewController {
         return crossImage
     }()
     
+    // MARK: - 4. / Init
+    init(userService: UserService, userName: String) {
+        
+        self.userService = userService
+        self.userName = userName
+                
+        self.avatarImageView.image = userService.currentUser(userName: userName).userAvatar
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,18 +96,10 @@ class ProfileViewController: UIViewController {
         
         avatarImageView.layer.cornerRadius = view.bounds.width * 0.3 / 2
         
-        if (userNotLoggedInMark) {
-            logInViewOpener()
-        }
-    }
-    
-    // MARK: LogInView
-    private func logInViewOpener() {
-        navigationController?.pushViewController(logInViewController, animated: true)
-        userNotLoggedInMark = false
     }
     
     private func setupTableView() {
+        navigationController?.tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = true
         
         profilePostsTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
@@ -401,7 +410,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = self.headerView
 
-        headerView.section = Storage.postsTabel[section]
+        // MARK: - 5.
+        let user = userService.currentUser(userName: userName)
+        
+        headerView.avatarImageView.image = user.userAvatar
+        headerView.fullNameLabel.text = user.userName
 
         return headerView
       }
