@@ -13,7 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     // MARK: - 1-7.
-    private let cryptoInspector = LogInCryptoInspector()
+//    private let cryptoInspector = LogInCryptoInspector()
+    
+    // MARK: - 2-3.
+    private let loginFactory = MyLogInFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -22,7 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if let tabController = window?.rootViewController as? UITabBarController, let loginNavigation = tabController.viewControllers?.last as? UINavigationController, let loginController = loginNavigation.viewControllers.first as? LogInViewController {
-            loginController.delegate = cryptoInspector
+//            loginController.delegate = cryptoInspector
+            loginController.delegate = loginFactory.setLogInInspector()
         }
     }
 

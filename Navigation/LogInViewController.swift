@@ -262,6 +262,21 @@ class LogInCryptoInspector: LogInViewControllerDelegate {
     
 }
 
+// MARK: - 2-1.
+protocol LogInFactory {
+    func setLogInInspector() -> LogInCryptoInspector
+}
+
+// MARK: - 2-2.
+struct MyLogInFactory: LogInFactory {
+    
+    private let inspector3000 = LogInCryptoInspector()
+    
+    func setLogInInspector() -> LogInCryptoInspector {
+        return inspector3000
+    }
+}
+
 extension UIView {
     func addSubviews(_ views: UIView...) {
         views.forEach { addSubview($0) }
