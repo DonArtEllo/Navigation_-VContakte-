@@ -73,29 +73,5 @@ final class FeedViewController: UIViewController {
         
         return fButton
     }()
-/*
-     Попытка сделать доп.задание программно:
-     
-     lazy var secondStackViewButton: UIButton = {
-         let sButton = UIButton()
-         
-         return sButton
-     }()
-     
-     lazy var newStackView: UIStackView = {
-         let stack = UIStackView(frame: self.view.bounds)
-         stack.axis = .vertical
-         
-         stack.distribution = .fillEqually
-         stack.alignment = .fill
-         stack.spacing = 10
-         stack.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                 
-         stack.addArrangedSubview(self.firtsStackViewButton)
-         stack.addArrangedSubview(self.secondStackViewButton)
-         
-         return stack
-     }()
-     
-     */
+
 }

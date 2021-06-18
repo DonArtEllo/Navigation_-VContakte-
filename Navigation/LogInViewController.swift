@@ -123,9 +123,30 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // MARK: - 4.
     @objc private func logInButtonSuccessed() {
-        navigationController?.popViewController(animated: true)
-        navigationController?.tabBarController?.tabBar.isHidden = false
+
+        let userName = loginTextFiel.text
+        // MARK: - 7.
+        #if DEBUG
+        let userService = TestUserService()
+        #else
+        let userService = CurrentUserService()
+        #endif
+        
+        if let existingUserName = userName {
+            let profileViewController = ProfileViewController(userService: userService, userName: existingUserName)
+            if userService.currentUser(userName: existingUserName).userAvatar != UIImage() {
+                navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                let alertController = UIAlertController(title: "Неверный логин", message: "Побробуйте ещё раз", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
+                print("Неверный логин был введен")
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: Keyboard Actions

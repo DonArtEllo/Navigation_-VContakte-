@@ -12,19 +12,11 @@ import SnapKit
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
-    // MARK: Data from Storage
-    var section: ProfilePage? {
-        didSet {
-            avatarImageView.image = section?.avatar
-            fullNameLabel.text = section?.fullName
-        }
-    }
-    
     private var statusText: String = "Searching for your IP..."
     
     // MARK: - Profile Header Content
     // User's profile image
-    public var avatarImageView: UIImageView = {
+    internal var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.clipsToBounds = true
@@ -38,7 +30,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     }()
     
     // User's profile name
-    private let fullNameLabel: UILabel = {
+    internal let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         fullNameLabel.textColor = .black
@@ -148,7 +140,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     fileprivate func setupViews() {
         
         #if DEBUG
-        contentView.backgroundColor = .systemPink
+        contentView.backgroundColor = .systemYellow
         #else
         contentView.backgroundColor = .systemGray6
         #endif
