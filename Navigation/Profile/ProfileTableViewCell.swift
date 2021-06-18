@@ -8,15 +8,18 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileTableViewCell: UITableViewCell {
         
+    var representedIdentifier = 0
+    
     // MARK: Data from Storage
     var post: ProfilePagePost? {
         didSet {
             postAuthorLabel.text = post?.author
             postDescriptionLabel.text =  post?.description
-            postContentImage.image = UIImage(imageLiteralResourceName: post?.image ?? "error")
+//            postContentImage.image = UIImage(imageLiteralResourceName: post?.image ?? "error")
             postLikesCountLabel.text = "Likes: \(post?.likes ?? 100)"
             postViewsCountLabel.text = "Views: \(post?.views ?? 150)"
         }
@@ -136,6 +139,11 @@ class ProfileTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate(constraints)
         
+    }
+    
+    // Configure picture with filter
+    func configure(with image: UIImage) {
+        postContentImage.image = image
     }
     
 }

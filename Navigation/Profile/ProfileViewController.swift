@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
     
     private let headerView = ProfileTableHeaderView()
     
+    private let asyncProcessor = ProfileAsyncProcessor()
+    
     private var fullscreenBackgroundView: UIView = {
         let fullscreenBackgroundView = UIView()
         fullscreenBackgroundView.backgroundColor = .black
@@ -371,6 +373,27 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             postsSectionTableViewCell.post = post
             
+            // MARK: New logic with cache
+            let identifier = indexPath.row
+            postsSectionTableViewCell.representedIdentifier = identifier
+            
+            if (asyncProcessor.processedImages[identifier] != nil) {
+                postsSectionTableViewCell.configure(with: asyncProcessor.processedImages[identifier]!)
+            } else {
+                asyncProcessor.process(for: identifier) { image in
+                    guard let image = image else {
+                        return
+                    }
+                    // check identifier
+                    guard postsSectionTableViewCell.representedIdentifier == identifier else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        postsSectionTableViewCell.configure(with: image)
+                    }
+                }
+            }
             return postsSectionTableViewCell
         }
     }

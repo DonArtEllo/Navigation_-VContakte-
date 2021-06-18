@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "iOSIntPackage",
+        "repositoryURL": "https://github.com/TrueMax/iOSIntPackage",
+        "state": {
+          "branch": null,
+          "revision": "14d16538a1e2c3a7b0655a3c77eb06ebf020cc8b",
+          "version": "3.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
