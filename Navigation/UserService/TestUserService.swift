@@ -8,12 +8,11 @@
 
 import UIKit
 
-// Mark: - 6.
 class TestUserService: UserService {
     
-    let testUser = User(userName: "Test User", userAvatar: #imageLiteral(resourceName: "test_avatar"))
+    let testUser = User(userLogin: "TEST", userName: "Test User", userAvatar: #imageLiteral(resourceName: "test_avatar"))
     
-    func currentUser(userName: String) -> User {
+    func currentUser(userLogin: String) -> User {
         
         return testUser
     }

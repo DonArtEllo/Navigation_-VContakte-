@@ -8,21 +8,22 @@
 
 import UIKit
 
-// MARK: - 2.
 protocol UserService {
     
-    func currentUser(userName: String) -> User
+    func currentUser(userLogin: String) -> User
 }
 
-// MARK: - 1.
 class User {
     
+    internal let userLogin: String
     internal let userName: String
     internal var userAvatar: UIImage
     
-    init(userName: String,
+    init(userLogin: String,
+         userName: String,
          userAvatar: UIImage) {
         
+        self.userLogin = userLogin
         self.userName = userName
         self.userAvatar = userAvatar
     }

@@ -11,6 +11,8 @@ import UIKit
 class LogInViewController: UIViewController {
     
     // MARK: Properties
+    weak var delegate: LogInViewControllerDelegate?
+    
     private let scrollView = UIScrollView()
     private let containerView = UIView()
     
@@ -123,30 +125,52 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: - 4.
+    // MARK: Log In Logic
     @objc private func logInButtonSuccessed() {
 
-        let userName = loginTextFiel.text
-        // MARK: - 7.
+        let typedLogin = loginTextFiel.text
+        let typedPassword = passwordTextFiel.text ?? ""
         #if DEBUG
         let userService = TestUserService()
         #else
         let userService = CurrentUserService()
         #endif
         
-        if let existingUserName = userName {
-            let profileViewController = ProfileViewController(userService: userService, userName: existingUserName)
-            if userService.currentUser(userName: existingUserName).userAvatar != UIImage() {
-                navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                let alertController = UIAlertController(title: "Неверный логин", message: "Побробуйте ещё раз", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
-                print("Неверный логин был введен")
+        if let existingUserLogin = typedLogin {
+            let profileViewController = ProfileViewController(userService: userService, typedLogin: existingUserLogin)
+            if userService.currentUser(userLogin: existingUserLogin).userAvatar != UIImage() {
+                
+                let currentMoment = Date()
+                let typedInfo = (typedLogin ?? "") + "\(currentMoment.hashValue)" + typedPassword
+                
+                if checkMyPass(typedInfo, time: currentMoment) {
+                    navigationController?.pushViewController(profileViewController, animated: true)
+                    return
                 }
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
             }
+            
+            let alertController = UIAlertController(title: "Неверный логин или пароль", message: "Побробуйте ещё раз", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
+                print("Неверный логин или пароль были введены")
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            
         }
+    }
+    
+    private func checkMyPass(_ infoToCheck: String, time: Date) -> Bool {
+        
+        let cryptedInfo = infoToCheck.sha256()
+        
+        guard let checkResult = delegate?.checkLoginAndPassword(
+                stringToCheck: cryptedInfo,
+                currenTime: time
+        ) else {
+            return false
+        }
+        
+        return checkResult
     }
     
     // MARK: Keyboard Actions
@@ -219,6 +243,23 @@ class LogInViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
+}
+
+// MARK: - 1-3.
+protocol LogInViewControllerDelegate: AnyObject {
+    
+    // MARK: - 1-6.
+    func checkLoginAndPassword(stringToCheck: String, currenTime: Date) -> Bool
+}
+
+// MARK: - 1-4.
+class LogInCryptoInspector: LogInViewControllerDelegate {
+    
+    func checkLoginAndPassword(stringToCheck: String, currenTime: Date) -> Bool {
+        // MARK: - 1-5.
+        return Checker.shared.compareHashedStrings(loginPasswordSHA256: stringToCheck, time: currenTime)
+    }
+    
 }
 
 extension UIView {
