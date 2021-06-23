@@ -132,9 +132,11 @@ class LogInViewController: UIViewController {
         let typedPassword = passwordTextFiel.text ?? ""
         #if DEBUG
         let userService = TestUserService()
+        let profileViewController = ProfileViewController(userService: userService, typedLogin: userService.testUser.userLogin)
+        
+        navigationController?.pushViewController(profileViewController, animated: true)
         #else
         let userService = CurrentUserService()
-        #endif
         
         if let existingUserLogin = typedLogin {
             let profileViewController = ProfileViewController(userService: userService, typedLogin: existingUserLogin)
@@ -157,6 +159,7 @@ class LogInViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
         }
+        #endif
     }
     
     private func checkMyPass(_ infoToCheck: String, time: Date) -> Bool {
@@ -245,29 +248,23 @@ class LogInViewController: UIViewController {
     }
 }
 
-// MARK: - 1-3.
 protocol LogInViewControllerDelegate: AnyObject {
     
-    // MARK: - 1-6.
     func checkLoginAndPassword(stringToCheck: String, currenTime: Date) -> Bool
 }
 
-// MARK: - 1-4.
 class LogInCryptoInspector: LogInViewControllerDelegate {
     
     func checkLoginAndPassword(stringToCheck: String, currenTime: Date) -> Bool {
-        // MARK: - 1-5.
         return Checker.shared.compareHashedStrings(loginPasswordSHA256: stringToCheck, time: currenTime)
     }
     
 }
 
-// MARK: - 2-1.
 protocol LogInFactory {
     func setLogInInspector() -> LogInCryptoInspector
 }
 
-// MARK: - 2-2.
 struct MyLogInFactory: LogInFactory {
     
     private let inspector3000 = LogInCryptoInspector()

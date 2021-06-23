@@ -12,10 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    // MARK: - 1-7.
-//    private let cryptoInspector = LogInCryptoInspector()
-    
-    // MARK: - 2-3.
     private let loginFactory = MyLogInFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -25,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if let tabController = window?.rootViewController as? UITabBarController, let loginNavigation = tabController.viewControllers?.last as? UINavigationController, let loginController = loginNavigation.viewControllers.first as? LogInViewController {
-//            loginController.delegate = cryptoInspector
             loginController.delegate = loginFactory.setLogInInspector()
         }
     }

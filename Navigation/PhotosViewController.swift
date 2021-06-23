@@ -8,10 +8,15 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     let customSeparator: CGFloat = 8
+    private var imageCollection: [UIImage] = []
+    
+    // MARK: - 5
+    var imagePublisherFacade: ImagePublisherFacade?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,6 +37,10 @@ class PhotosViewController: UIViewController {
         view.backgroundColor = .white
         title = "Photo Gallery"
         view.addSubview(collectionView)
+        
+        // MARK: - 7
+        imagePublisherFacade?.subscribe(self)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +61,15 @@ class PhotosViewController: UIViewController {
             height: view.frame.height - view.safeAreaInsets.top
         )
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // MARK: - 9
+        imagePublisherFacade?.removeSubscription(for: self)
+        imagePublisherFacade?.rechargeImageLibrary()
+    }
+    
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
@@ -60,13 +78,13 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Storage.photosTabel.count
+        return imageCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
         
-        let photo = Storage.photosTabel[indexPath.row]
+        let photo = imageCollection[indexPath.row]
         
         cell.photo = photo
         
@@ -88,4 +106,15 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: customSeparator, left: customSeparator, bottom: customSeparator, right: customSeparator)
     }
+}
+
+// MARK: - 4
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    // MARK: - 10
+    func receive(images: [UIImage]) {
+        self.imageCollection = images
+        collectionView.reloadData()
+    }
+    
 }
