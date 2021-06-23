@@ -19,7 +19,6 @@ class ProfileTableViewCell: UITableViewCell {
         didSet {
             postAuthorLabel.text = post?.author
             postDescriptionLabel.text =  post?.description
-//            postContentImage.image = UIImage(imageLiteralResourceName: post?.image ?? "error")
             postLikesCountLabel.text = "Likes: \(post?.likes ?? 100)"
             postViewsCountLabel.text = "Views: \(post?.views ?? 150)"
         }

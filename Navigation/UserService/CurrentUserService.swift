@@ -8,17 +8,16 @@
 
 import UIKit
 
-// MARK: - 3.
 class CurrentUserService: UserService {
     
-    let currentUser = User(userName: "Hacker Kitten", userAvatar: #imageLiteral(resourceName: "cat"))
+    let currentUser = User(userLogin: "h4ckerK1tten", userName: "Hacker Kitten", userAvatar: #imageLiteral(resourceName: "cat"))
 
-    func currentUser(userName: String) -> User {
+    func currentUser(userLogin: String) -> User {
         
-        if userName == currentUser.userName {
+        if userLogin == currentUser.userLogin {
             return currentUser
         } else {
-            return User(userName: "", userAvatar: UIImage())
+            return User(userLogin: "", userName: "", userAvatar: UIImage())
         }
     }
     

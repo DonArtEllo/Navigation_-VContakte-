@@ -16,6 +16,8 @@
 		060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C5250CEB0A00A87020 /* InfoViewController.swift */; };
 		060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C7250CEE5D00A87020 /* PostViewController.swift */; };
 		514984005207DAE4508EC9E3 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9C1FAD924F28887A5707B0 /* Pods_Navigation.framework */; };
+		8C0C0498267D2BA50013F764 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0497267D2BA50013F764 /* Checker.swift */; };
+		8C0C049A267D2BCD0013F764 /* CryptoPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0499267D2BCD0013F764 /* CryptoPass.swift */; };
 		8C17A06A2613A0E100761ABB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17A0692613A0E100761ABB /* LogInViewController.swift */; };
 		8C2D120C266CA8C900CC159D /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2D120B266CA8C900CC159D /* iOSIntPackage */; };
 		8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E8CD5266FA83800371B29 /* ProfileAsyncProcessor.swift */; };
@@ -78,6 +80,8 @@
 		5D681F2619EB9BB9AD9EBE1F /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		5F9C1FAD924F28887A5707B0 /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D788D21EC899863E9087B0 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
+		8C0C0497267D2BA50013F764 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		8C0C0499267D2BCD0013F764 /* CryptoPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPass.swift; sourceTree = "<group>"; };
 		8C17A0692613A0E100761ABB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8C2E8CD5266FA83800371B29 /* ProfileAsyncProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAsyncProcessor.swift; sourceTree = "<group>"; };
 		8C2E8CD926751FB200371B29 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				060782C7250CEE5D00A87020 /* PostViewController.swift */,
 				8C515F90260F4808000BE417 /* Profile */,
 				8C17A0692613A0E100761ABB /* LogInViewController.swift */,
+				8C0C0496267D2B7D0013F764 /* PasswordService */,
 				8C2E8CD726751F4100371B29 /* UserService */,
 				8C32F2BA2629636D00CC3B65 /* PhotosTableViewCell.swift */,
 				8C32F2BF262988EF00CC3B65 /* PhotosProfileCollectionViewCell.swift */,
@@ -169,6 +174,15 @@
 				90DD5A192DA1D88BD18B6840 /* Pods_StorageService.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8C0C0496267D2B7D0013F764 /* PasswordService */ = {
+			isa = PBXGroup;
+			children = (
+				8C0C0497267D2BA50013F764 /* Checker.swift */,
+				8C0C0499267D2BCD0013F764 /* CryptoPass.swift */,
+			);
+			path = PasswordService;
 			sourceTree = "<group>";
 		};
 		8C2E8CD726751F4100371B29 /* UserService */ = {
@@ -409,12 +423,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C32F2BB2629636D00CC3B65 /* PhotosTableViewCell.swift in Sources */,
+				8C0C049A267D2BCD0013F764 /* CryptoPass.swift in Sources */,
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				8C2E8CDA26751FB200371B29 /* User.swift in Sources */,
 				8C17A06A2613A0E100761ABB /* LogInViewController.swift in Sources */,
 				8C66E6602625AAE900B697C0 /* ProfileTableViewCell.swift in Sources */,
 				8C2E8CDC26752B6900371B29 /* CurrentUserService.swift in Sources */,
+				8C0C0498267D2BA50013F764 /* Checker.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				8C515F92260F5186000BE417 /* ProfileTableHeaderView.swift in Sources */,
 				8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */,

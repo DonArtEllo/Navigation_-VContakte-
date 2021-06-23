@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     private var animationWasShownMark = true
     private let reusedID = "cellID"
     
-    private let userName: String
+    private let currentUserLogin: String
     private let userService: UserService
     
     private let profilePostsTableView = UITableView(frame: .zero, style: .grouped)
@@ -58,13 +58,13 @@ class ProfileViewController: UIViewController {
         return crossImage
     }()
     
-    // MARK: - 4. / Init
-    init(userService: UserService, userName: String) {
+    // MARK: - Init
+    init(userService: UserService, typedLogin: String) {
         
         self.userService = userService
-        self.userName = userName
+        self.currentUserLogin = typedLogin
                 
-        self.avatarImageView.image = userService.currentUser(userName: userName).userAvatar
+        self.avatarImageView.image = userService.currentUser(userLogin: typedLogin).userAvatar
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -410,8 +410,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = self.headerView
 
-        // MARK: - 5.
-        let user = userService.currentUser(userName: userName)
+        let user = userService.currentUser(userLogin: currentUserLogin)
         
         headerView.avatarImageView.image = user.userAvatar
         headerView.fullNameLabel.text = user.userName
