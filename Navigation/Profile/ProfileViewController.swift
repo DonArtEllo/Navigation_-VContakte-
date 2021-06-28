@@ -8,6 +8,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
@@ -23,6 +24,9 @@ class ProfileViewController: UIViewController {
     private let headerView = ProfileTableHeaderView()
     
     private let asyncProcessor = ProfileAsyncProcessor()
+    
+    private let facade = ImagePublisherFacade()
+    var collection: [UIImage] = []
     
     private var fullscreenBackgroundView: UIView = {
         let fullscreenBackgroundView = UIView()
@@ -421,7 +425,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if (indexPath.section == 0) {
+            
             let photoCollectionViewController = PhotosViewController()
+            
+            Storage.photosTabel.forEach {
+                collection.append(UIImage(imageLiteralResourceName: $0.image))
+            }
+            
+            photoCollectionViewController.imagePublisherFacade = facade
+            
+            // MARK: - 8
+            // MARK: - 11
+            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 1.5, repeat: 30, userImages: collection)
+            
             navigationController?.pushViewController(photoCollectionViewController, animated: true)
         } else {
             return
