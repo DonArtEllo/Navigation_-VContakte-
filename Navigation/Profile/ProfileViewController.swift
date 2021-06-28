@@ -434,8 +434,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             photoCollectionViewController.imagePublisherFacade = facade
             
-            // MARK: - 8
-            // MARK: - 11
             photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 1.5, repeat: 30, userImages: collection)
             
             navigationController?.pushViewController(photoCollectionViewController, animated: true)
