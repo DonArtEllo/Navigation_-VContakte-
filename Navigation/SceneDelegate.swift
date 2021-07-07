@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     private let loginFactory = MyLogInFactory()
+    private let feedChecker = FeedModel()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -22,6 +23,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let tabController = window?.rootViewController as? UITabBarController, let loginNavigation = tabController.viewControllers?.last as? UINavigationController, let loginController = loginNavigation.viewControllers.first as? LogInViewController {
             loginController.delegate = loginFactory.setLogInInspector()
+        }
+        
+        if let tabController = window?.rootViewController as? UITabBarController, let feedNavigation = tabController.viewControllers?.first as? UINavigationController, let feedController = feedNavigation.viewControllers.first as? FeedViewController {
+            
+            feedController.passworder = feedChecker
         }
     }
 
