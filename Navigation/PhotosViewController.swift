@@ -15,7 +15,6 @@ class PhotosViewController: UIViewController {
     let customSeparator: CGFloat = 8
     private var imageCollection: [UIImage] = []
     
-    // MARK: - 5
     var imagePublisherFacade: ImagePublisherFacade?
     
     private lazy var collectionView: UICollectionView = {
@@ -38,7 +37,6 @@ class PhotosViewController: UIViewController {
         title = "Photo Gallery"
         view.addSubview(collectionView)
         
-        // MARK: - 7
         imagePublisherFacade?.subscribe(self)
         
     }
@@ -65,7 +63,6 @@ class PhotosViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        // MARK: - 9
         imagePublisherFacade?.removeSubscription(for: self)
         imagePublisherFacade?.rechargeImageLibrary()
     }
@@ -108,10 +105,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - 4
 extension PhotosViewController: ImageLibrarySubscriber {
     
-    // MARK: - 10
     func receive(images: [UIImage]) {
         self.imageCollection = images
         collectionView.reloadData()

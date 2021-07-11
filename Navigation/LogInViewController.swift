@@ -96,17 +96,14 @@ class LogInViewController: UIViewController {
         return loginPasswordStack
     }()
     
+    // MARK: - 1-2.
     // Log In Button
-    private lazy var logInButton: UIButton  = {
-        let button = UIButton(type: .system)
-        button.setTitle("Log In", for: .normal)
+    private lazy var logInButton: UpgradedButton  = {
+        let button = UpgradedButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: logInButtonSuccessed)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.darkGray, for: .selected)
         button.setTitleColor(.darkGray, for: .highlighted)
-        button.addTarget(self, action: #selector(logInButtonSuccessed), for: .touchUpInside)
         
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     

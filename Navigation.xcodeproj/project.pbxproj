@@ -19,6 +19,9 @@
 		8C0C0498267D2BA50013F764 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0497267D2BA50013F764 /* Checker.swift */; };
 		8C0C049A267D2BCD0013F764 /* CryptoPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0499267D2BCD0013F764 /* CryptoPass.swift */; };
 		8C17A06A2613A0E100761ABB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17A0692613A0E100761ABB /* LogInViewController.swift */; };
+		8C1A887E2689C9AD0043AEF3 /* UpgradedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1A887D2689C9AD0043AEF3 /* UpgradedButton.swift */; };
+		8C1A88812689DA840043AEF3 /* UpgradedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1A88802689DA840043AEF3 /* UpgradedTextField.swift */; };
+		8C1A88842689DAE80043AEF3 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1A88832689DAE80043AEF3 /* FeedModel.swift */; };
 		8C2D120C266CA8C900CC159D /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2D120B266CA8C900CC159D /* iOSIntPackage */; };
 		8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E8CD5266FA83800371B29 /* ProfileAsyncProcessor.swift */; };
 		8C2E8CDA26751FB200371B29 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E8CD926751FB200371B29 /* User.swift */; };
@@ -83,6 +86,9 @@
 		8C0C0497267D2BA50013F764 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		8C0C0499267D2BCD0013F764 /* CryptoPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPass.swift; sourceTree = "<group>"; };
 		8C17A0692613A0E100761ABB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		8C1A887D2689C9AD0043AEF3 /* UpgradedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradedButton.swift; sourceTree = "<group>"; };
+		8C1A88802689DA840043AEF3 /* UpgradedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradedTextField.swift; sourceTree = "<group>"; };
+		8C1A88832689DAE80043AEF3 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		8C2E8CD5266FA83800371B29 /* ProfileAsyncProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAsyncProcessor.swift; sourceTree = "<group>"; };
 		8C2E8CD926751FB200371B29 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8C2E8CDB26752B6900371B29 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
@@ -155,14 +161,16 @@
 				060782BF250CE27A00A87020 /* Info.plist */,
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
 				060782C7250CEE5D00A87020 /* PostViewController.swift */,
-				8C515F90260F4808000BE417 /* Profile */,
 				8C17A0692613A0E100761ABB /* LogInViewController.swift */,
 				8C0C0496267D2B7D0013F764 /* PasswordService */,
+				8C515F90260F4808000BE417 /* Profile */,
 				8C2E8CD726751F4100371B29 /* UserService */,
 				8C32F2BA2629636D00CC3B65 /* PhotosTableViewCell.swift */,
 				8C32F2BF262988EF00CC3B65 /* PhotosProfileCollectionViewCell.swift */,
 				8C32F2C2262C84E800CC3B65 /* PhotosViewController.swift */,
 				8C32F2C5262C8F9500CC3B65 /* PhotosCollectionViewCell.swift */,
+				8C1A88822689DAD20043AEF3 /* Models */,
+				8C1A887F2689C9B60043AEF3 /* Views */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -183,6 +191,23 @@
 				8C0C0499267D2BCD0013F764 /* CryptoPass.swift */,
 			);
 			path = PasswordService;
+			sourceTree = "<group>";
+		};
+		8C1A887F2689C9B60043AEF3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C1A887D2689C9AD0043AEF3 /* UpgradedButton.swift */,
+				8C1A88802689DA840043AEF3 /* UpgradedTextField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C1A88822689DAD20043AEF3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C1A88832689DAE80043AEF3 /* FeedModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8C2E8CD726751F4100371B29 /* UserService */ = {
@@ -426,6 +451,7 @@
 				8C0C049A267D2BCD0013F764 /* CryptoPass.swift in Sources */,
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
+				8C1A887E2689C9AD0043AEF3 /* UpgradedButton.swift in Sources */,
 				8C2E8CDA26751FB200371B29 /* User.swift in Sources */,
 				8C17A06A2613A0E100761ABB /* LogInViewController.swift in Sources */,
 				8C66E6602625AAE900B697C0 /* ProfileTableViewCell.swift in Sources */,
@@ -436,9 +462,11 @@
 				8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
 				8C32F2C0262988EF00CC3B65 /* PhotosProfileCollectionViewCell.swift in Sources */,
+				8C1A88812689DA840043AEF3 /* UpgradedTextField.swift in Sources */,
 				8C32F2C6262C8F9500CC3B65 /* PhotosCollectionViewCell.swift in Sources */,
 				8C2E8CDE26752C6800371B29 /* TestUserService.swift in Sources */,
 				8C32F2C3262C84E800CC3B65 /* PhotosViewController.swift in Sources */,
+				8C1A88842689DAE80043AEF3 /* FeedModel.swift in Sources */,
 				8C515F95260F51B0000BE417 /* ProfileViewController.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
 			);

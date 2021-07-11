@@ -79,29 +79,22 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
         return statusTextField
     }()
-    
+
+    // MARK: - 1-2.
     // Status button
-    private let setStatusButton: UIButton = {
-        let setStatusButton = UIButton()
-        setStatusButton.setTitle("Show status", for: .normal)
-        setStatusButton.setTitleColor(.white, for: .normal)
-        setStatusButton.backgroundColor = .systemBlue
-            
+    private lazy var setStatusButton: UpgradedButton = {
+        let setStatusButton = UpgradedButton(titleText: "Show status", titleColor: .white, backgroundColor: .systemBlue, tapAction: self.actionSetStatusButtonPressed)
         setStatusButton.layer.cornerRadius = 4
         setStatusButton.layer.shadowRadius = 4
         setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         setStatusButton.layer.shadowColor = UIColor.black.cgColor
         setStatusButton.layer.shadowOpacity = 0.7
         
-        setStatusButton.addTarget(self, action: #selector(actionSetStatusButtonPressed), for: .touchUpInside)
-        
-        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
-
         return setStatusButton
     }()
     
     // MARK: Actions
-    @objc private func actionSetStatusButtonPressed() {
+    private func actionSetStatusButtonPressed() {
         statusTextField.endEditing(true)
         if statusText == "" {
             statusText = "No status"
