@@ -12,6 +12,7 @@ import StorageService
 final class FeedViewController: UIViewController {
     
     let post: Post = Post(title: "Пост")
+    weak var coordinator: FeedCoordinator?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -148,9 +149,11 @@ final class FeedViewController: UIViewController {
     // MARK: - Functions
     // MARK: Setup
     func setup() {
-                
+
         addObrervers()
         
+        view.backgroundColor = .systemGreen
+
         view.addSubviews(
             checkerButton,
             secretwordTextField,
