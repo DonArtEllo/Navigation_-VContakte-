@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
 //    private let loginFactory = MyLogInFactory()
-    private let feedChecker = FeedModel()
     let rootCoordinator = RootCoordinator()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -27,11 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        loginController.delegate = loginFactory.setLogInInspector()
         
         window?.rootViewController = rootCoordinator.tabBarController
-        
-        if let tabController = window?.rootViewController as? UITabBarController, let feedNavigation = tabController.viewControllers?.first as? UINavigationController, let feedController = feedNavigation.viewControllers.first as? FeedViewController {
-            
-            feedController.passworder = feedChecker
-        }
         
         window?.makeKeyAndVisible()
     }

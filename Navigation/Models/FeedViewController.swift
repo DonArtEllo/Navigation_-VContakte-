@@ -14,9 +14,9 @@ final class FeedViewController: UIViewController {
     let post: Post = Post(title: "Пост")
     weak var coordinator: FeedCoordinator?
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print(type(of: self), #function)
+    init(viewModel: FeedModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -80,7 +80,7 @@ final class FeedViewController: UIViewController {
     }()
 
     // MARK: - Feed Page Content
-    var passworder: FeedModel?
+    var viewModel: FeedModel?
     
     // Background fader for animation
     private var fullscreenBackgroundView: UIView = {
@@ -94,8 +94,7 @@ final class FeedViewController: UIViewController {
     
     // Button for checking word
     private lazy var checkerButton: UpgradedButton  = {
-        let button = UpgradedButton(titleText: "Check", titleColor: .white, backgroundColor: .white, tapAction: self.actionSetStatusButtonPressed)
-        button.backgroundColor = .gray
+        let button = UpgradedButton(titleText: "Check", titleColor: .white, backgroundColor: .gray, tapAction: self.actionSetStatusButtonPressed)
         button.setTitleColor(.black, for: .selected)
         button.setTitleColor(.black, for: .highlighted)
         
@@ -146,6 +145,19 @@ final class FeedViewController: UIViewController {
         return resultLabel
     }()
     
+    private lazy var funnyPictureButton: UpgradedButton = {
+        let button = UpgradedButton(titleText: "Don't be sad", titleColor: .black, backgroundColor: .yellow, tapAction: self.actionFunnyPictureButtonPressed)
+        button.setTitleColor(.black, for: .selected)
+        button.setTitleColor(.black, for: .highlighted)
+        
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.masksToBounds = true
+        
+        return button
+    }()
+    
     // MARK: - Functions
     // MARK: Setup
     func setup() {
@@ -156,6 +168,7 @@ final class FeedViewController: UIViewController {
 
         view.addSubviews(
             checkerButton,
+            funnyPictureButton,
             secretwordTextField,
             fullscreenBackgroundView,
             resultLabel
@@ -173,6 +186,10 @@ final class FeedViewController: UIViewController {
             checkerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             checkerButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -50),
             checkerButton.widthAnchor.constraint(equalToConstant: 100),
+            
+            funnyPictureButton.centerXAnchor.constraint(equalTo: checkerButton.centerXAnchor),
+            funnyPictureButton.centerYAnchor.constraint(equalTo: checkerButton.centerYAnchor, constant: 50),
+            funnyPictureButton.widthAnchor.constraint(equalToConstant: 200),
             
             secretwordTextField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             secretwordTextField.centerYAnchor.constraint(equalTo: checkerButton.topAnchor, constant: -25),
@@ -195,8 +212,12 @@ final class FeedViewController: UIViewController {
         
         if secretwordTextField.text != nil && secretwordTextField.text?.count != 0 {
             print("Password sent to server")
-            passworder?.check(word: secretwordTextField.text!)
+            viewModel?.check(word: secretwordTextField.text!)
         }
+    }
+    
+    private func actionFunnyPictureButtonPressed() {
+        viewModel?.onTapShowFunnyPicture()
     }
     
     private func secretwordTextFieldChanged(_: String) {

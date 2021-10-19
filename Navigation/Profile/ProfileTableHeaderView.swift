@@ -80,7 +80,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         return statusTextField
     }()
 
-    // MARK: - 1-2.
     // Status button
     private lazy var setStatusButton: UpgradedButton = {
         let setStatusButton = UpgradedButton(titleText: "Show status", titleColor: .white, backgroundColor: .systemBlue, tapAction: self.actionSetStatusButtonPressed)

@@ -8,7 +8,6 @@
 
 import UIKit
 
-// MARK: - 1-1.
 final class UpgradedButton: UIButton {
     
     var nextLevelUltraNewAction: (() -> Void)?

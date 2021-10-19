@@ -12,14 +12,25 @@ final class FeedCoordinator: Coordinator {
     var coordinators: [Coordinator] = []
     let navigationController: UINavigationController
     
-    init(navigation: UINavigationController) {
+    private let factory: ControllerFactory
+    private lazy var feedModule = {
+        factory.makeFeed()
+    }()
+    
+    init(navigation: UINavigationController,
+         factory: ControllerFactory) {
         self.navigationController = navigation
+        self.factory = factory
     }
     
     func start() {
         
-        let viewController = FeedViewController()
-        viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: true)
+        feedModule.viewModel.onShowFunnyPicture = {
+            
+            let funnyPictureCoordinator = FunnyPictureCoordinator(navigation: self.navigationController, factory: self.factory)
+            funnyPictureCoordinator.start()
+        }
+        
+        navigationController.pushViewController(feedModule.controller, animated: true)
     }
 }
