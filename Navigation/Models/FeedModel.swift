@@ -8,14 +8,24 @@
 
 import Foundation
 
+protocol FeedViewOutput {
+    var onTapShowFunnyPicture: () -> Void { get }
+}
+
 // Слой бизнес-логики или МОДЕЛЬ
 
-final class FeedModel {
-        
+final class FeedModel: FeedViewOutput {
+    
     let notificationCenter = NotificationCenter.default
     private let secretWord: String = "Conditional password"
     
     init() {}
+    
+    var onShowFunnyPicture: (() -> Void)?
+    
+    lazy var onTapShowFunnyPicture: () -> Void = { [weak self] in
+        self?.onShowFunnyPicture?()
+    }
     
     func check(word: String) {
         

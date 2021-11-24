@@ -8,10 +8,14 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInController: UIViewController {
     
     // MARK: Properties
     weak var delegate: LogInViewControllerDelegate?
+    
+    
+    // MARK: - 1-3.
+    weak var coordinator: LoginCoordinator?
     
     private let scrollView = UIScrollView()
     private let containerView = UIView()
@@ -96,7 +100,6 @@ class LogInViewController: UIViewController {
         return loginPasswordStack
     }()
     
-    // MARK: - 1-2.
     // Log In Button
     private lazy var logInButton: UpgradedButton  = {
         let button = UpgradedButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: logInButtonSuccessed)
