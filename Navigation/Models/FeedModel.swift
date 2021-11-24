@@ -10,6 +10,7 @@ import Foundation
 
 protocol FeedViewOutput {
     var onTapShowFunnyPicture: () -> Void { get }
+    var onTapShowNFTCollection: () -> Void { get }
 }
 
 // Слой бизнес-логики или МОДЕЛЬ
@@ -25,6 +26,12 @@ final class FeedModel: FeedViewOutput {
     
     lazy var onTapShowFunnyPicture: () -> Void = { [weak self] in
         self?.onShowFunnyPicture?()
+    }
+    
+    var onShowNFTCollection: (() -> Void)?
+    
+    lazy var onTapShowNFTCollection: () -> Void = { [weak self] in
+        self?.onShowNFTCollection?()
     }
     
     func check(word: String) {

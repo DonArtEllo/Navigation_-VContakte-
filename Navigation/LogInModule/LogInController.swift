@@ -14,7 +14,6 @@ class LogInController: UIViewController {
     weak var delegate: LogInViewControllerDelegate?
     
     
-    // MARK: - 1-3.
     weak var coordinator: LoginCoordinator?
     
     private let scrollView = UIScrollView()

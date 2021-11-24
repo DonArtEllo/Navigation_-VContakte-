@@ -31,6 +31,12 @@ final class FeedCoordinator: Coordinator {
             funnyPictureCoordinator.start()
         }
         
+        feedModule.viewModel.onShowNFTCollection = {
+            
+            let nFTCollectionCoordinator = NFTCollectionCoordinator(navigation: self.navigationController, factory: self.factory)
+            nFTCollectionCoordinator.start()
+        }
+        
         navigationController.pushViewController(feedModule.controller, animated: true)
     }
 }
