@@ -12,6 +12,7 @@ import iOSIntPackage
 final class NFTCollectionViewController: UIViewController{
     
     private var viewModel: NFTCollectionModel
+    private var processedImages = [CGImage]()
     private let processorOnThread = ImageProcessor()
         
     private lazy var collectionView: UICollectionView = {
@@ -52,7 +53,7 @@ final class NFTCollectionViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSLog ("Start")
+        processImages()
         setupViews()
     }
     
@@ -86,6 +87,57 @@ final class NFTCollectionViewController: UIViewController{
         NSLayoutConstraint.activate(constraints)
     }
     
+    // MARK: - 4
+    private func processImages() {
+        NSLog ("Start")
+        processorOnThread.processImagesOnThread(sourceImages: viewModel.nftImages, filter: .monochrome(color: .red, intensity: 2), qos: .background)
+            { (resultImages) in
+                DispatchQueue.main.async {
+                    for image in resultImages {
+                        self.processedImages.append(image!)
+                    }
+                    self.collectionView.reloadData()
+                    NSLog ("Ended")
+                }
+            }
+    }
+    
+    // MARK: - 6
+    // REWORKED
+    // Results for filter .colorInvert
+    // qos: .background - 00:00:52.073272
+    //      Start - 14:07:25.892864+0300
+    //      End - 14:08:17.966136+0300
+    // qos: .default - 00:00:35.895115
+    //      Start - 14:08:17.966136+0300
+    //      End - 14:08:53.861251+0300
+    // qos: .userInitiated - 00:00:07.824310
+    //      Start - 14:09:29.391638+0300
+    //      End - 14:09:37.215948+0300
+    // qos: .userInteractive - 00:00:06.319278
+    //      Start - 14:10:16.377426+0300
+    //      End - 14:10:22.696704+0300
+    // qos: .utility - 00:00:07.363522
+    //      Start - 14:13:34.040710+030
+    //      End - 14:13:41.404232+030
+    
+    // Results for filter .monochrome(color: .red, intensity: 2)
+    // qos: .background - 00:00:58.633476
+    //      Start - 14:18:35.648834+0300
+    //      End - 14:19:34.282314+0300
+    // qos: .default - 00:00:06.826707
+    //      Start - 14:17:58.109966+0300
+    //      End - 14:18:04.936673+0300
+    // qos: .userInitiated - 00:00:06.279666
+    //      Start - 14:17:11.749657+0300
+    //      End - 14:17:18.029323+0300
+    // qos: .userInteractive - 00:00:06.220320
+    //      Start - 14:15:49.643073+0300
+    //      End - 14:15:55.863393+0300
+    // qos: .utility - 00:00:08.797772
+    //      Start - 14:14:40.625087+0300
+    //      End - 14:14:49.422859+0300
+    
     @objc private func actionGoBackToFeedButtonPressed() {
         viewModel.onTapGoBackToFeed()
     }
@@ -104,50 +156,14 @@ extension NFTCollectionViewController: UICollectionViewDataSource {
         let identifier = indexPath.row
         cell.representedIdentifier = identifier
         
-        // MARK: - 4
-        processorOnThread.processImagesOnThread(sourceImages: viewModel.nftImages, filter: .colorInvert, qos: .userInteractive) { (processedImages) in
-            DispatchQueue.main.async {
-                cell.configure(with: UIImage(cgImage: processedImages[identifier]!))
-                NSLog ("End image \(identifier)")
-                
+        DispatchQueue.main.async { [self] in
+            if !processedImages.isEmpty {
+                cell.configure(with: UIImage(cgImage: processedImages[identifier]))
+            } else {
+                cell.configure(with: viewModel.nftImages[identifier])
             }
         }
-        
-        // MARK: - 6
-        // Results for filter .colorInvert
-        // qos: .background - 00:01:36.570671
-        //      Start - 22:13:09.882803+0300
-        //      End - 22:14:46.453474+0300
-        // qos: .default - 00:01:07.806278
-        //      Start - 22:15:58.820805+0300
-        //      End - 22:17:06.627083+0300
-        // qos: .userInitiated - 00:01:01.865371
-        //      Start - 22:18:50.663722+0300
-        //      End - 22:19:52.529093+0300
-        // qos: .userInteractive - 00:00:59.205161 (Smth went wrong w/ my pc 00:01:04.952689)
-        //      Start - 22:30:53.220713+0300 (22:23:09.824422+0300)
-        //      End - 22:31:50.425874+0300 (22:24:14.777111+0300)
-        // qos: .utility - 00:00:57.729279
-        //      Start - 22:26:50.179010+0300
-        //      End - 22:27:47.908289+0300
-        
-        // Results for filter .monochrome(color: .red, intensity: 2)
-        // qos: .background - 00:01:22.452252
-        //      Start - 21:54:24.054374+0300
-        //      End - 21:55:46.506626+0300
-        // qos: .default - 00:01:07.360087
-        //      Start - 21:57:27.543162+0300
-        //      End - 21:58:34.903249+0300
-        // qos: .userInitiated - 00:01:06.042581
-        //      Start - 22:01:18.888109+0300
-        //      End - 22:02:24.930690+0300
-        // qos: .userInteractive - 00:01:02.854655
-        //      Start - 22:05:56.789858+0300
-        //      End - 22:06:59.644513+0300
-        // qos: .utility - 00:01:04.672649
-        //      Start - 22:10:26.680979+0300
-        //      End - 22:11:31.353628+0300
-        
+                
         return cell
     }
     
