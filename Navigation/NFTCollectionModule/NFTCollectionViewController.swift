@@ -156,7 +156,7 @@ extension NFTCollectionViewController: UICollectionViewDataSource {
         let identifier = indexPath.row
         cell.representedIdentifier = identifier
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.sync { [self] in
             if !processedImages.isEmpty {
                 cell.configure(with: UIImage(cgImage: processedImages[identifier]))
             } else {

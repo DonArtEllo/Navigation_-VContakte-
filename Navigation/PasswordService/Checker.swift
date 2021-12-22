@@ -13,7 +13,7 @@ class Checker {
     static let shared = Checker()
     
     private let login: String = "h4ckerK1tten"
-    private let password: String = "StronKP4ss"
+    private let password: String = "{9Z!"
     
     private init() {
         
