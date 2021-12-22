@@ -8,17 +8,17 @@
 
 import UIKit
 
-// MARK: - 2-1.
 protocol ControllerFactory {
     func makeFeed() -> (viewModel: FeedModel, controller: FeedViewController)
     
-    func makeFunnyPicture() -> (viewmodel: FunnyPictureModel, controller: FunnyPictureViewController)
+    func makeFunnyPicture() -> (viewModel: FunnyPictureModel, controller: FunnyPictureViewController)
+    
+    func makeNFTCollection() -> (viewModel: NFTCollectionModel, controller: NFTCollectionViewController)
     
 }
 
 struct ControllerFactoryImpl: ControllerFactory {
-    // MARK: - 2-2.
-    func makeFunnyPicture() -> (viewmodel: FunnyPictureModel, controller: FunnyPictureViewController) {
+    func makeFunnyPicture() -> (viewModel: FunnyPictureModel, controller: FunnyPictureViewController) {
         let viewModel = FunnyPictureModel()
         let controller = FunnyPictureViewController(viewModel: viewModel)
         return (viewModel, controller)
@@ -30,4 +30,9 @@ struct ControllerFactoryImpl: ControllerFactory {
         return (viewModel, controller)
     }
     
+    func makeNFTCollection() -> (viewModel: NFTCollectionModel, controller: NFTCollectionViewController) {
+        let viewModel = NFTCollectionModel()
+        let controller = NFTCollectionViewController(viewModel: viewModel)
+        return (viewModel, controller)
+    }
 }

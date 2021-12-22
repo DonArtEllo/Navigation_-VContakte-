@@ -1,20 +1,20 @@
 //
-//  FunnyPictureCoordinator.swift
+//  NFTCollectionCoordinator.swift
 //  Navigation
 //
-//  Created by Артем on 19.10.2021.
+//  Created by Артем on 26.10.2021.
 //  Copyright © 2021 Artem Novichkov. All rights reserved.
 //
 
 import UIKit
 
-final class FunnyPictureCoordinator: Coordinator {
+final class NFTCollectionCoordinator: Coordinator {
     var coordinators: [Coordinator] = []
     let navigationController: UINavigationController
     
     private let factory: ControllerFactory
-    private lazy var funnyPictureModule = {
-        factory.makeFunnyPicture()
+    private lazy var nFTCollectionModule = {
+        factory.makeNFTCollection()
     }()
     
     init(navigation: UINavigationController,
@@ -24,10 +24,10 @@ final class FunnyPictureCoordinator: Coordinator {
     }
     
     func start() {
-        
-        navigationController.pushViewController(funnyPictureModule.controller, animated: true)
+        navigationController.pushViewController(self.nFTCollectionModule.controller, animated: true)
 
-        funnyPictureModule.viewModel.onShowFeed = {
+
+        nFTCollectionModule.viewModel.onShowFeed = {
             self.navigationController.popToRootViewController(animated: true)
         }
     }

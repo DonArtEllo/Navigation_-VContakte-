@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: - 2-5.
 protocol FunnyPictureViewOutput {
     var moduleTitle: String { get }
     var onTapGoBackToFeed: () -> Void { get }

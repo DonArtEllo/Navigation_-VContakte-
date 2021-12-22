@@ -20,8 +20,7 @@ final class FeedViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print(type(of: self), #function)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -80,7 +79,7 @@ final class FeedViewController: UIViewController {
     }()
 
     // MARK: - Feed Page Content
-    var viewModel: FeedModel?
+    var viewModel: FeedModel
     
     // Background fader for animation
     private var fullscreenBackgroundView: UIView = {
@@ -158,6 +157,19 @@ final class FeedViewController: UIViewController {
         return button
     }()
     
+    private lazy var nFTCollectionButton: UpgradedButton = {
+        let button = UpgradedButton(titleText: "PRESS ME", titleColor: .black, backgroundColor: .cyan, tapAction: self.actionNFTCollectionButtonPressed)
+        button.setTitleColor(.black, for: .selected)
+        button.setTitleColor(.black, for: .highlighted)
+        
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.masksToBounds = true
+        
+        return button
+    }()
+    
     // MARK: - Functions
     // MARK: Setup
     func setup() {
@@ -169,6 +181,7 @@ final class FeedViewController: UIViewController {
         view.addSubviews(
             checkerButton,
             funnyPictureButton,
+            nFTCollectionButton,
             secretwordTextField,
             fullscreenBackgroundView,
             resultLabel
@@ -191,6 +204,10 @@ final class FeedViewController: UIViewController {
             funnyPictureButton.centerYAnchor.constraint(equalTo: checkerButton.centerYAnchor, constant: 50),
             funnyPictureButton.widthAnchor.constraint(equalToConstant: 200),
             
+            nFTCollectionButton.centerXAnchor.constraint(equalTo: funnyPictureButton.centerXAnchor),
+            nFTCollectionButton.centerYAnchor.constraint(equalTo: funnyPictureButton.centerYAnchor, constant: 50),
+            nFTCollectionButton.widthAnchor.constraint(equalToConstant: 200),
+            
             secretwordTextField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             secretwordTextField.centerYAnchor.constraint(equalTo: checkerButton.topAnchor, constant: -25),
             secretwordTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.75),
@@ -212,12 +229,16 @@ final class FeedViewController: UIViewController {
         
         if secretwordTextField.text != nil && secretwordTextField.text?.count != 0 {
             print("Password sent to server")
-            viewModel?.check(word: secretwordTextField.text!)
+            viewModel.check(word: secretwordTextField.text!)
         }
     }
     
     private func actionFunnyPictureButtonPressed() {
-        viewModel?.onTapShowFunnyPicture()
+        viewModel.onTapShowFunnyPicture()
+    }
+    
+    private func actionNFTCollectionButtonPressed() {
+        viewModel.onTapShowNFTCollection()
     }
     
     private func secretwordTextFieldChanged(_: String) {

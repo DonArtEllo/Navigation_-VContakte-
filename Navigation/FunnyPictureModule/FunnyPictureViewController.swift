@@ -8,7 +8,6 @@
 
 import UIKit
 
-// MARK: - 2-3.
 final class FunnyPictureViewController: UIViewController{
     
     private var viewModel: FunnyPictureViewOutput

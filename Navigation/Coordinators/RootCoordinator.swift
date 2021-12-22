@@ -7,14 +7,12 @@
 //
 
 import UIKit
-// MARK: - 1-1.
 class RootCoordinator: Coordinator {
     
     var coordinators: [Coordinator] = []
     let tabBarController: TabBarController
     private let factory = ControllerFactoryImpl()
     
-    // MARK: - 1-2.
     init() {
         tabBarController = TabBarController()
         
@@ -22,6 +20,8 @@ class RootCoordinator: Coordinator {
         coordinators.append(feedCoordinator)
         let funnyPictureCoordinator = configureFunnyPicture()
         coordinators.append(funnyPictureCoordinator)
+        let nFTCollectionCoordinator = configureNFTCollection()
+        coordinators.append(nFTCollectionCoordinator)
         let loginCoordinator = configureLogin()
         coordinators.append(loginCoordinator)
 
@@ -31,6 +31,7 @@ class RootCoordinator: Coordinator {
         
         feedCoordinator.start()
         funnyPictureCoordinator.start()
+        nFTCollectionCoordinator.start()
         loginCoordinator.start()
     }
     
@@ -59,6 +60,17 @@ class RootCoordinator: Coordinator {
         return coordinator
     }
     
+    private func configureNFTCollection() -> NFTCollectionCoordinator {
+        
+        let navigationNFTC = UINavigationController()
+        
+        let coordinator = NFTCollectionCoordinator(
+            navigation: navigationNFTC,
+            factory: factory)
+        
+        return coordinator
+    }
+    
     private func configureLogin() -> LoginCoordinator {
         
         let navigationSecond = UINavigationController()
@@ -71,17 +83,5 @@ class RootCoordinator: Coordinator {
         
         return coordinator
     }
-//    private func configureLogin() -> LoginCoordinator {
-//
-//        let navigationFirst = UINavigationController()
-//        navigationFirst.tabBarItem = UITabBarItem(
-//            title: "Profile",
-//            image: UIImage(systemName: "person"),
-//            selectedImage: nil)
-//        let coordinator = LoginCoordinator(
-//            navigation: navigationFirst, factory: factory)
-//
-//        return coordinator
-//    }
 }
 
