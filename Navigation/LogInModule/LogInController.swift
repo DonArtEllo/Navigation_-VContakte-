@@ -164,6 +164,8 @@ class LogInController: UIViewController {
     // MARK: Log In Logic
     @objc private func logInButtonSuccessed() {
 
+        weak var weakSelf = self
+        
         let typedLogin = loginTextFiel.text
         let typedPassword = passwordTextField.text ?? ""
         #if DEBUG
@@ -192,7 +194,7 @@ class LogInController: UIViewController {
                 print("Неверный логин или пароль были введены")
             }
             alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+            weakSelf?.present(alertController, animated: true, completion: nil)
             
         }
         #endif
