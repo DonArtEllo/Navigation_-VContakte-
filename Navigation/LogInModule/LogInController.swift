@@ -101,7 +101,8 @@ class LogInController: UIViewController {
     
     // Log In Button
     private lazy var logInButton: UpgradedButton  = {
-        let button = UpgradedButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: logInButtonSuccessed)
+        let button = UpgradedButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: { [weak self] in self?.logInButtonSuccessed()
+        })
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
         button.setTitleColor(.darkGray, for: .selected)
         button.setTitleColor(.darkGray, for: .highlighted)
@@ -163,8 +164,6 @@ class LogInController: UIViewController {
     
     // MARK: Log In Logic
     @objc private func logInButtonSuccessed() {
-
-        weak var weakSelf = self
         
         let typedLogin = loginTextFiel.text
         let typedPassword = passwordTextField.text ?? ""
@@ -194,7 +193,7 @@ class LogInController: UIViewController {
                 print("Неверный логин или пароль были введены")
             }
             alertController.addAction(okAction)
-            weakSelf?.present(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             
         }
         #endif
