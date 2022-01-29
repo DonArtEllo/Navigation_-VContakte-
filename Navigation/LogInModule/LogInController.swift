@@ -12,9 +12,9 @@ class LogInController: UIViewController {
     
     // MARK: Properties
     weak var delegate: LogInViewControllerDelegate?
-    
-    
     weak var coordinator: LoginCoordinator?
+    
+    private let passwordHacker = PasswordHacker()
     
     private let scrollView = UIScrollView()
     private let containerView = UIView()
@@ -49,7 +49,7 @@ class LogInController: UIViewController {
     }()
     
     // Password Field
-    private lazy var passwordTextFiel: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let password = UITextField()
         password.textColor = .black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -85,7 +85,7 @@ class LogInController: UIViewController {
         
         loginPasswordStack.addArrangedSubview(loginTextFiel)
         loginPasswordStack.addArrangedSubview(spacerForStackView)
-        loginPasswordStack.addArrangedSubview(passwordTextFiel)
+        loginPasswordStack.addArrangedSubview(passwordTextField)
         
         spacerForStackView.widthAnchor.constraint(equalTo: loginPasswordStack.widthAnchor, multiplier: 1).isActive = true
 
@@ -101,12 +101,33 @@ class LogInController: UIViewController {
     
     // Log In Button
     private lazy var logInButton: UpgradedButton  = {
-        let button = UpgradedButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: logInButtonSuccessed)
+        let button = UpgradedButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: { [weak self] in self?.logInButtonSuccessed()
+        })
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
         button.setTitleColor(.darkGray, for: .selected)
         button.setTitleColor(.darkGray, for: .highlighted)
         
         return button
+    }()
+    
+    // MARK: - 2
+    // Brute Force Button
+    private lazy var passwordHackingButton: UpgradedButton  = {
+        let button = UpgradedButton(titleText: "Guess the password", titleColor: .white, backgroundColor: .purple, tapAction: tryToHackThePassword)
+        button.setTitleColor(.darkGray, for: .selected)
+        button.setTitleColor(.darkGray, for: .highlighted)
+        
+        return button
+    }()
+    
+    // Activity Indicator
+    private let activitiIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.style = .large
+        
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
     }()
     
     // MARK: Keyboard notifications
@@ -124,11 +145,28 @@ class LogInController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // MARK: - 3
+    private func tryToHackThePassword() {
+        let globalQueue = DispatchQueue.global(qos: .utility)
+        
+        activitiIndicator.startAnimating()
+        globalQueue.async {
+            let forcedPassword = self.passwordHacker.bruteForce()
+            DispatchQueue.main.async { [self] in
+                passwordTextField.text = forcedPassword
+                
+                // MARK: - 4
+                passwordTextField.isSecureTextEntry = false
+                activitiIndicator.stopAnimating()
+            }
+        }
+    }
+    
     // MARK: Log In Logic
     @objc private func logInButtonSuccessed() {
-
+        
         let typedLogin = loginTextFiel.text
-        let typedPassword = passwordTextFiel.text ?? ""
+        let typedPassword = passwordTextField.text ?? ""
         #if DEBUG
         let userService = TestUserService()
         let profileViewController = ProfileViewController(userService: userService, typedLogin: userService.testUser.userLogin)
@@ -210,7 +248,9 @@ class LogInController: UIViewController {
         containerView.addSubviews(
             logoImageView,
             loginAndPasswordStackView,
-            logInButton
+            logInButton,
+            passwordHackingButton,
+            activitiIndicator
         )
         
         let constraints = [
@@ -240,7 +280,17 @@ class LogInController: UIViewController {
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            logInButton.bottomAnchor.constraint(equalTo: loginAndPasswordStackView.bottomAnchor, constant: 66)
+            logInButton.bottomAnchor.constraint(equalTo: loginAndPasswordStackView.bottomAnchor, constant: 66),
+            
+            passwordHackingButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 16),
+            passwordHackingButton.heightAnchor.constraint(equalToConstant: 50),
+            passwordHackingButton.leadingAnchor.constraint(equalTo: logInButton.leadingAnchor),
+            passwordHackingButton.trailingAnchor.constraint(equalTo: logInButton.trailingAnchor),
+            
+            activitiIndicator.centerXAnchor.constraint(equalTo: logoImageView.centerXAnchor),
+            activitiIndicator.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 25),
+            activitiIndicator.heightAnchor.constraint(equalToConstant: 100),
+            activitiIndicator.widthAnchor.constraint(equalToConstant: 100)
         ]
         
         NSLayoutConstraint.activate(constraints)

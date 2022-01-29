@@ -156,12 +156,10 @@ extension NFTCollectionViewController: UICollectionViewDataSource {
         let identifier = indexPath.row
         cell.representedIdentifier = identifier
         
-        DispatchQueue.main.async { [self] in
-            if !processedImages.isEmpty {
-                cell.configure(with: UIImage(cgImage: processedImages[identifier]))
-            } else {
-                cell.configure(with: viewModel.nftImages[identifier])
-            }
+        if !processedImages.isEmpty {
+            cell.configure(with: UIImage(cgImage: processedImages[identifier]))
+        } else {
+            cell.configure(with: viewModel.nftImages[identifier])
         }
                 
         return cell

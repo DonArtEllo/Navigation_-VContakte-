@@ -44,6 +44,7 @@
 		8C87D61F26B165A000439C3E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D61E26B165A000439C3E /* LoginCoordinator.swift */; };
 		8C87D62126B17F9A00439C3E /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D62026B17F9A00439C3E /* ControllerFactory.swift */; };
 		8C87D62426B1805900439C3E /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D62326B1805900439C3E /* LogInViewModel.swift */; };
+		8CA8846E27733B700005B405 /* PasswordHacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA8846D27733B700005B405 /* PasswordHacker.swift */; };
 		8CAD16D9271D849B000A0E7D /* FunnyPictureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAD16D8271D849B000A0E7D /* FunnyPictureModel.swift */; };
 		8CAD16DB271D84C4000A0E7D /* FunnyPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAD16DA271D84C4000A0E7D /* FunnyPictureViewController.swift */; };
 		8CAD16DD271EEE6F000A0E7D /* FunnyPictureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAD16DC271EEE6F000A0E7D /* FunnyPictureCoordinator.swift */; };
@@ -123,6 +124,7 @@
 		8C87D61E26B165A000439C3E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		8C87D62026B17F9A00439C3E /* ControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerFactory.swift; sourceTree = "<group>"; };
 		8C87D62326B1805900439C3E /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		8CA8846D27733B700005B405 /* PasswordHacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHacker.swift; sourceTree = "<group>"; };
 		8CAD16D8271D849B000A0E7D /* FunnyPictureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunnyPictureModel.swift; sourceTree = "<group>"; };
 		8CAD16DA271D84C4000A0E7D /* FunnyPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunnyPictureViewController.swift; sourceTree = "<group>"; };
 		8CAD16DC271EEE6F000A0E7D /* FunnyPictureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunnyPictureCoordinator.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				8C422C59274ECEA7009668AF /* NFTCollectionModule */,
 				8C87D62226B1801900439C3E /* LogInModule */,
 				8C0C0496267D2B7D0013F764 /* PasswordService */,
+				8CA8846C27733B440005B405 /* BruteForce */,
 				8C515F90260F4808000BE417 /* Profile */,
 				8C2E8CD726751F4100371B29 /* UserService */,
 				8C32F2BA2629636D00CC3B65 /* PhotosTableViewCell.swift */,
@@ -308,6 +311,14 @@
 			);
 			name = FeedModule;
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8CA8846C27733B440005B405 /* BruteForce */ = {
+			isa = PBXGroup;
+			children = (
+				8CA8846D27733B700005B405 /* PasswordHacker.swift */,
+			);
+			path = BruteForce;
 			sourceTree = "<group>";
 		};
 		8CAD16D7271D846E000A0E7D /* FunnyPictureModule */ = {
@@ -539,6 +550,7 @@
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				8C1A887E2689C9AD0043AEF3 /* UpgradedButton.swift in Sources */,
+				8CA8846E27733B700005B405 /* PasswordHacker.swift in Sources */,
 				8C422C58274ECE40009668AF /* NFTCollectionCoordinator.swift in Sources */,
 				8C2E8CDA26751FB200371B29 /* User.swift in Sources */,
 				8CAD16DB271D84C4000A0E7D /* FunnyPictureViewController.swift in Sources */,
