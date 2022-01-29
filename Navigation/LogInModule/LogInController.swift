@@ -110,7 +110,6 @@ class LogInController: UIViewController {
         return button
     }()
     
-    // MARK: - 2
     // Brute Force Button
     private lazy var passwordHackingButton: UpgradedButton  = {
         let button = UpgradedButton(titleText: "Guess the password", titleColor: .white, backgroundColor: .purple, tapAction: tryToHackThePassword)
@@ -145,7 +144,6 @@ class LogInController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: - 3
     private func tryToHackThePassword() {
         let globalQueue = DispatchQueue.global(qos: .utility)
         
@@ -155,7 +153,6 @@ class LogInController: UIViewController {
             DispatchQueue.main.async { [self] in
                 passwordTextField.text = forcedPassword
                 
-                // MARK: - 4
                 passwordTextField.isSecureTextEntry = false
                 activitiIndicator.stopAnimating()
             }

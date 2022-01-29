@@ -87,7 +87,6 @@ final class NFTCollectionViewController: UIViewController{
         NSLayoutConstraint.activate(constraints)
     }
     
-    // MARK: - 4
     private func processImages() {
         NSLog ("Start")
         processorOnThread.processImagesOnThread(sourceImages: viewModel.nftImages, filter: .monochrome(color: .red, intensity: 2), qos: .background)
@@ -101,42 +100,6 @@ final class NFTCollectionViewController: UIViewController{
                 }
             }
     }
-    
-    // MARK: - 6
-    // REWORKED
-    // Results for filter .colorInvert
-    // qos: .background - 00:00:52.073272
-    //      Start - 14:07:25.892864+0300
-    //      End - 14:08:17.966136+0300
-    // qos: .default - 00:00:35.895115
-    //      Start - 14:08:17.966136+0300
-    //      End - 14:08:53.861251+0300
-    // qos: .userInitiated - 00:00:07.824310
-    //      Start - 14:09:29.391638+0300
-    //      End - 14:09:37.215948+0300
-    // qos: .userInteractive - 00:00:06.319278
-    //      Start - 14:10:16.377426+0300
-    //      End - 14:10:22.696704+0300
-    // qos: .utility - 00:00:07.363522
-    //      Start - 14:13:34.040710+030
-    //      End - 14:13:41.404232+030
-    
-    // Results for filter .monochrome(color: .red, intensity: 2)
-    // qos: .background - 00:00:58.633476
-    //      Start - 14:18:35.648834+0300
-    //      End - 14:19:34.282314+0300
-    // qos: .default - 00:00:06.826707
-    //      Start - 14:17:58.109966+0300
-    //      End - 14:18:04.936673+0300
-    // qos: .userInitiated - 00:00:06.279666
-    //      Start - 14:17:11.749657+0300
-    //      End - 14:17:18.029323+0300
-    // qos: .userInteractive - 00:00:06.220320
-    //      Start - 14:15:49.643073+0300
-    //      End - 14:15:55.863393+0300
-    // qos: .utility - 00:00:08.797772
-    //      Start - 14:14:40.625087+0300
-    //      End - 14:14:49.422859+0300
     
     @objc private func actionGoBackToFeedButtonPressed() {
         viewModel.onTapGoBackToFeed()
