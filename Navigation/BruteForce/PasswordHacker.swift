@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: - 1
 class PasswordHacker {
     
     private let rigthPassword = "{9Z!"

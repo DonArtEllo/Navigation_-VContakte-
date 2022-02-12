@@ -16,7 +16,7 @@ protocol NFTCollectionViewOutput {
 
 final class NFTCollectionModel: NFTCollectionViewOutput {
     
-    // MARK: - 2,3 NFT Images for Collection
+    // MARK: NFT Images for Collection
     let nftImages = [
         #imageLiteral(resourceName: "punk1"),
         #imageLiteral(resourceName: "punk2"),

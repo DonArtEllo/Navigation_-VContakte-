@@ -6,15 +6,46 @@
 //  Copyright © 2021 Artem Novichkov. All rights reserved.
 //
 
+// MARK: - 1
+/*
+ 1. Переход из Login на Profile сделать не моментальным, а с задержкой (будто происходит связь с сервером)
+ 
+ 2. На странице с весёлой картинкой раз в некоторое время менять изображение (сделать массив картинок и проходить по ним с определённым интервалом)
+ 
+ 3. На экране, где загружается коллекция изображений с фильтром:
+    - показать таймер с начала обработки
+    - по окончанию обработки выводить alert с названием фильтра и временем, затраченным на обработку
+    - alert можно просто закрыть или поменять фильтр и начать обработку снова
+    - если пользователь выбрал "сменить фильтр", то через 3 секунды начать обработку уже со следующим фильтром из списка
+ */
+
 import UIKit
 
 final class FunnyPictureViewController: UIViewController{
     
     private var viewModel: FunnyPictureViewOutput
+    private let dogeImagesArray = [
+        #imageLiteral(resourceName: "doge"),
+        #imageLiteral(resourceName: "doge_2"),
+        #imageLiteral(resourceName: "doge_3"),
+        #imageLiteral(resourceName: "doge_4"),
+        #imageLiteral(resourceName: "doge_5")
+    ]
+    
+    private let timerLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.textAlignment = .center
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private let dogeImageView: UIImageView = {
         let doge = UIImageView()
-        doge.image = #imageLiteral(resourceName: "doge")
+        doge.image = #imageLiteral(resourceName: "doge_5")
+        doge.contentMode = .scaleAspectFit
         
         doge.translatesAutoresizingMaskIntoConstraints = false
         return doge
@@ -47,22 +78,28 @@ final class FunnyPictureViewController: UIViewController{
         super.viewDidLoad()
         
         setupViews()
+        addTimer()
     }
     
     private func setupViews() {
         navigationController?.navigationBar.isHidden = true
-        title = viewModel.moduleTitle
         view.backgroundColor = .yellow
         
         view.addSubviews(
+            timerLabel,
             dogeImageView,
             iAmGoodButton
         )
         
         let constraints = [
+            timerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            timerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            timerLabel.heightAnchor.constraint(equalToConstant: 50),
+            
             dogeImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             dogeImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-            dogeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, constant: -100),
+            dogeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, constant: -150),
             
             iAmGoodButton.centerXAnchor.constraint(equalTo: dogeImageView.centerXAnchor),
             iAmGoodButton.centerYAnchor.constraint(equalTo: dogeImageView.bottomAnchor, constant: 37.5),
@@ -75,5 +112,42 @@ final class FunnyPictureViewController: UIViewController{
     
     @objc private func actionGoBackToFeedButtonPressed() {
         viewModel.onTapGoBackToFeed()
+    }
+    
+    // MARK: - 2
+    private func addTimer() {
+        var imageNumber = 0
+        var sec = -1
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            
+            sec += 1
+            if sec == 5 {
+                self.timerLabel.text = "New image!"
+            } else {
+                self.timerLabel.text = "New image in \(5 - sec)..."
+            }
+            
+            if sec == 5 {
+                self.changeDogeImage(imageNumber: imageNumber)
+                imageNumber += 1
+                
+                if imageNumber > 4 {
+                    imageNumber = 0
+                }
+                sec = -1
+            }
+            
+            if self.view.isHidden {
+                timer.invalidate()
+            }
+        }
+        
+        timer.fire()
+        
+        
+    }
+    
+    private func changeDogeImage(imageNumber: Int) {
+        self.dogeImageView.image = self.dogeImagesArray[imageNumber]
     }
 }
