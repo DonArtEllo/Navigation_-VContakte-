@@ -162,32 +162,30 @@ class LogInController: UIViewController {
         globalQueue.async {
             
             // MARK: - 1-4
-            do {
-                let forcedPassword = try self.passwordHacker.bruteForce()
-                print("Password found")
-
-                DispatchQueue.main.async { [self] in
-                    passwordTextField.text = forcedPassword
-
-                    passwordTextField.isSecureTextEntry = false
-                    activitiIndicator.stopAnimating()
+            self.passwordHacker.bruteForce { result in
+                switch result {
+                case .success(let forcedPassword):
+                    print("Password found")
+                    
+                    DispatchQueue.main.sync { [self] in
+                        passwordTextField.text = forcedPassword
+                        
+                        passwordTextField.isSecureTextEntry = false
+                        activitiIndicator.stopAnimating()
+                    }
+                case .failure(let error):
+                    self.errorCatched(error: error == LoginError.tooStrongPassword ? "The password is too strong" : "Unknown error")
                 }
-            } catch LoginError.tooStrongPassword {
-                let error = "The password is too strong"
-                self.errorCatched(error: error)
-            } catch {
-                let error = "Unknown error"
-                self.errorCatched(error: error)
             }
         }
     }
     
     private func errorCatched(error : String) {
-        let alertController = UIAlertController(title: error, message: "Something went wrong. Try to hack again", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
-            print(error)
-        }
-        alertController.addAction(okAction)
+            let alertController = UIAlertController(title: error, message: "Something went wrong. Try to hack again", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                print(error)
+            }
+            alertController.addAction(okAction)
         
         DispatchQueue.main.async { [self] in
             activitiIndicator.stopAnimating()
