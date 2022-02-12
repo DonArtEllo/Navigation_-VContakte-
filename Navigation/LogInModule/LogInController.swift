@@ -8,6 +8,17 @@
 
 import UIKit
 
+// MARK: - 1-2
+enum LoginError: Error {
+    
+    
+    // MARK: - 1-3
+    case userNotFound
+    case wrongPassword
+    case serverError
+    case tooStrongPassword
+}
+
 class LogInController: UIViewController {
     
     // MARK: Properties
@@ -149,13 +160,38 @@ class LogInController: UIViewController {
         
         activitiIndicator.startAnimating()
         globalQueue.async {
-            let forcedPassword = self.passwordHacker.bruteForce()
-            DispatchQueue.main.async { [self] in
-                passwordTextField.text = forcedPassword
-                
-                passwordTextField.isSecureTextEntry = false
-                activitiIndicator.stopAnimating()
+            
+            // MARK: - 1-4
+            do {
+                let forcedPassword = try self.passwordHacker.bruteForce()
+                print("Password found")
+
+                DispatchQueue.main.async { [self] in
+                    passwordTextField.text = forcedPassword
+
+                    passwordTextField.isSecureTextEntry = false
+                    activitiIndicator.stopAnimating()
+                }
+            } catch LoginError.tooStrongPassword {
+                let error = "The password is too strong"
+                self.errorCatched(error: error)
+            } catch {
+                let error = "Unknown error"
+                self.errorCatched(error: error)
             }
+        }
+    }
+    
+    private func errorCatched(error : String) {
+        let alertController = UIAlertController(title: error, message: "Something went wrong. Try to hack again", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+            print(error)
+        }
+        alertController.addAction(okAction)
+        
+        DispatchQueue.main.async { [self] in
+            activitiIndicator.stopAnimating()
+            present(alertController, animated: true, completion: nil)
         }
     }
     
