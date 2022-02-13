@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     private var animationWasShownMark = true
     private let reusedID = "cellID"
     
+    private var currentUser: User?
     private let currentUserLogin: String
     private let userService: UserService
     
@@ -67,8 +68,6 @@ class ProfileViewController: UIViewController {
         
         self.userService = userService
         self.currentUserLogin = typedLogin
-                
-        self.avatarImageView.image = userService.currentUser(userLogin: typedLogin).userAvatar
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -81,6 +80,10 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkUserExistance(user: currentUserLogin)
+        
+        self.avatarImageView.image = currentUser?.userAvatar
+
         #if DEBUG
         view.backgroundColor = .systemRed
         #else
@@ -114,6 +117,39 @@ class ProfileViewController: UIViewController {
         )
         profilePostsTableView.dataSource = self
         profilePostsTableView.delegate = self
+    }
+    
+    // MARK: - 3
+    private func checkUserExistance(user: String){
+        do {
+            self.currentUser = try userService.currentUser(userLogin: user)
+        } catch LoginError.serverError {
+            let error = "User not found"
+            
+            DispatchQueue.main.async { [self] in
+                let alertController = UIAlertController(title: error, message: "Something went wrong on the server side. Please, try to log in again", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                    print(error)
+                    navigationController?.popViewController(animated: true)
+                }
+                alertController.addAction(okAction)
+            
+                present(alertController, animated: true, completion: nil)
+            }
+        } catch {
+            let error = "Unknown error been cathced"
+            
+            DispatchQueue.main.async { [self] in
+                let alertController = UIAlertController(title: error, message: "Something went wrong. Please, reload the app", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                    print(error)
+                    fatalError(error)
+                }
+                alertController.addAction(okAction)
+            
+                present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: Setup Constraints
@@ -414,10 +450,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = self.headerView
 
-        let user = userService.currentUser(userLogin: currentUserLogin)
+        let user = currentUser
         
-        headerView.avatarImageView.image = user.userAvatar
-        headerView.fullNameLabel.text = user.userName
+        headerView.avatarImageView.image = user?.userAvatar
+        headerView.fullNameLabel.text = user?.userName
 
         return headerView
       }

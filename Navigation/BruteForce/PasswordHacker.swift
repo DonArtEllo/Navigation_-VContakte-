@@ -10,9 +10,29 @@ import Foundation
 
 class PasswordHacker {
     
-    private let rigthPassword = "{9Z!"
+    private let rigthPassword = "{92"
     
-    func bruteForce() -> String {
+    // MARK: - 1-1
+//    func bruteForce() throws -> String {
+//        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
+//
+//        var password: String = ""
+//
+//        NSLog ("Start brute force")
+//
+//        while password != rigthPassword {
+//            password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+//            if password.count > 4 {
+//                            throw LoginError.tooStrongPassword
+//                        }
+//        }
+//
+//        NSLog (password)
+//
+//        return password
+//    }
+    
+    func bruteForce(completion: @escaping (Result<String, LoginError>) -> Void) {
         let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
 
         var password: String = ""
@@ -21,11 +41,14 @@ class PasswordHacker {
         
         while password != rigthPassword {
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+            if password.count > 2 {
+                return completion(.failure(LoginError.tooStrongPassword))
+            }
         }
         
         NSLog (password)
         
-        return password
+        return completion(.success(password))
     }
 }
 

@@ -12,12 +12,13 @@ class CurrentUserService: UserService {
     
     let currentUser = User(userLogin: "h4ckerK1tten", userName: "Hacker Kitten", userAvatar: #imageLiteral(resourceName: "cat"))
 
-    func currentUser(userLogin: String) -> User {
+    // MARK: - 3
+    func currentUser(userLogin: String) throws -> User {
         
         if userLogin == currentUser.userLogin {
             return currentUser
         } else {
-            return User(userLogin: "", userName: "", userAvatar: UIImage())
+            throw LoginError.serverError
         }
     }
     

@@ -8,6 +8,17 @@
 
 import UIKit
 
+// MARK: - 1-2
+enum LoginError: Error {
+    
+    
+    // MARK: - 1-3
+    case userNotFound
+    case wrongPassword
+    case serverError
+    case tooStrongPassword
+}
+
 class LogInController: UIViewController {
     
     // MARK: Properties
@@ -149,13 +160,40 @@ class LogInController: UIViewController {
         
         activitiIndicator.startAnimating()
         globalQueue.async {
-            let forcedPassword = self.passwordHacker.bruteForce()
-            DispatchQueue.main.async { [self] in
-                passwordTextField.text = forcedPassword
-                
-                passwordTextField.isSecureTextEntry = false
-                activitiIndicator.stopAnimating()
+            
+            // MARK: - 1-4
+            self.passwordHacker.bruteForce { result in
+                switch result {
+                case .success(let forcedPassword):
+                    print("Password found")
+                    
+                    DispatchQueue.main.sync { [self] in
+                        passwordTextField.text = forcedPassword
+                        
+                        passwordTextField.isSecureTextEntry = false
+                        activitiIndicator.stopAnimating()
+                    }
+                case .failure(let error):
+                    if error == LoginError.tooStrongPassword {
+                        self.errorCatched(error: "The password is too strong", errorMessage: "Something went wrong. Try to hack again")
+                    } else {
+                        self.errorCatched(error: "Unknown error", errorMessage: "Unknown error been cathced. Please, reload the app")
+                    }
+                }
             }
+        }
+    }
+    
+    private func errorCatched(error : String, errorMessage: String) {
+        DispatchQueue.main.async { [self] in
+            let alertController = UIAlertController(title: error, message: errorMessage, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                print(error)
+            }
+            alertController.addAction(okAction)
+        
+            activitiIndicator.stopAnimating()
+            present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -174,23 +212,42 @@ class LogInController: UIViewController {
         
         if let existingUserLogin = typedLogin {
             let profileViewController = ProfileViewController(userService: userService, typedLogin: existingUserLogin)
-            if userService.currentUser(userLogin: existingUserLogin).userAvatar != UIImage() {
-                
-                let currentMoment = Date()
-                let typedInfo = (typedLogin ?? "") + "\(currentMoment.hashValue)" + typedPassword
-                
-                if checkMyPass(typedInfo, time: currentMoment) {
-                    navigationController?.pushViewController(profileViewController, animated: true)
-                    return
-                }
-            }
+            do {
+                let currentUser = try userService.currentUser(userLogin: existingUserLogin)
             
-            let alertController = UIAlertController(title: "Неверный логин или пароль", message: "Побробуйте ещё раз", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
-                print("Неверный логин или пароль были введены")
+                if currentUser.userAvatar != UIImage() {
+                
+                    let currentMoment = Date()
+                    // MARK: - 4
+                    guard let checkedLogin = typedLogin else {
+                        preconditionFailure()
+                    }
+                    
+                    let typedInfo = checkedLogin + "\(currentMoment.hashValue)" + typedPassword
+                
+                    if checkMyPass(typedInfo, time: currentMoment) {
+                        navigationController?.pushViewController(profileViewController, animated: true)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Неверный пароль", message: "Побробуйте ещё раз", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
+                            print("Wrong password")
+                        }
+                        
+                        alertController.addAction(okAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            } catch LoginError.serverError {
+                let error = "User not found on the server"
+                self.errorCatched(error: error, errorMessage: "Something went wrong on the server side. Please, try to log in again")
+            } catch {
+                let error = "Unknown error"
+                self.errorCatched(error: error, errorMessage: "Something went wrong. Please, reload the app")
             }
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
             
         }
         #endif
