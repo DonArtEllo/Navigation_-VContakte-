@@ -10,7 +10,7 @@ import UIKit
 
 protocol UserService {
     
-    func currentUser(userLogin: String) -> User
+    func currentUser(userLogin: String) throws -> User
 }
 
 class User {

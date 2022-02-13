@@ -12,7 +12,7 @@ class TestUserService: UserService {
     
     let testUser = User(userLogin: "TEST", userName: "Test User", userAvatar: #imageLiteral(resourceName: "test_avatar"))
     
-    func currentUser(userLogin: String) -> User {
+    func currentUser(userLogin: String) throws -> User {
         
         return testUser
     }
