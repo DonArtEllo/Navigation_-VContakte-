@@ -218,7 +218,12 @@ class LogInController: UIViewController {
                 if currentUser.userAvatar != UIImage() {
                 
                     let currentMoment = Date()
-                    let typedInfo = (typedLogin ?? "") + "\(currentMoment.hashValue)" + typedPassword
+                    // MARK: - 4
+                    guard let checkedLogin = typedLogin else {
+                        preconditionFailure()
+                    }
+                    
+                    let typedInfo = checkedLogin + "\(currentMoment.hashValue)" + typedPassword
                 
                     if checkMyPass(typedInfo, time: currentMoment) {
                         navigationController?.pushViewController(profileViewController, animated: true)
