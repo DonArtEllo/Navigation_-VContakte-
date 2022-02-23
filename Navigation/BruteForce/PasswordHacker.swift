@@ -10,27 +10,7 @@ import Foundation
 
 class PasswordHacker {
     
-    private let rigthPassword = "{92"
-    
-    // MARK: - 1-1
-//    func bruteForce() throws -> String {
-//        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-//
-//        var password: String = ""
-//
-//        NSLog ("Start brute force")
-//
-//        while password != rigthPassword {
-//            password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-//            if password.count > 4 {
-//                            throw LoginError.tooStrongPassword
-//                        }
-//        }
-//
-//        NSLog (password)
-//
-//        return password
-//    }
+    private let rigthPassword = "{9Z!"
     
     func bruteForce(completion: @escaping (Result<String, LoginError>) -> Void) {
         let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }

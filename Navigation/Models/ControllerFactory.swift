@@ -15,6 +15,7 @@ protocol ControllerFactory {
     
     func makeNFTCollection() -> (viewModel: NFTCollectionModel, controller: NFTCollectionViewController)
     
+    func makeMedia() -> (viewModel: MediaModel, controller: MediaViewController)
 }
 
 struct ControllerFactoryImpl: ControllerFactory {
@@ -33,6 +34,12 @@ struct ControllerFactoryImpl: ControllerFactory {
     func makeNFTCollection() -> (viewModel: NFTCollectionModel, controller: NFTCollectionViewController) {
         let viewModel = NFTCollectionModel()
         let controller = NFTCollectionViewController(viewModel: viewModel)
+        return (viewModel, controller)
+    }
+    
+    func makeMedia() -> (viewModel: MediaModel, controller: MediaViewController) {
+        let viewModel = MediaModel()
+        let controller = MediaViewController(viewModel: viewModel)
         return (viewModel, controller)
     }
 }

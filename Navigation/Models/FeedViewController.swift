@@ -170,6 +170,19 @@ final class FeedViewController: UIViewController {
         return button
     }()
     
+    private lazy var mediaButton: UpgradedButton = {
+        let button = UpgradedButton(titleText: "Go to Media", titleColor: .black, backgroundColor: .white, tapAction: self.actionMediaButtonPressed)
+        button.setTitleColor(.black, for: .selected)
+        button.setTitleColor(.black, for: .highlighted)
+        
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.masksToBounds = true
+        
+        return button
+    }()
+    
     // MARK: - Functions
     // MARK: Setup
     func setup() {
@@ -182,6 +195,7 @@ final class FeedViewController: UIViewController {
             checkerButton,
             funnyPictureButton,
             nFTCollectionButton,
+            mediaButton,
             secretwordTextField,
             fullscreenBackgroundView,
             resultLabel
@@ -207,6 +221,10 @@ final class FeedViewController: UIViewController {
             nFTCollectionButton.centerXAnchor.constraint(equalTo: funnyPictureButton.centerXAnchor),
             nFTCollectionButton.centerYAnchor.constraint(equalTo: funnyPictureButton.centerYAnchor, constant: 50),
             nFTCollectionButton.widthAnchor.constraint(equalToConstant: 200),
+            
+            mediaButton.centerXAnchor.constraint(equalTo: nFTCollectionButton.centerXAnchor),
+            mediaButton.centerYAnchor.constraint(equalTo: nFTCollectionButton.centerYAnchor, constant: 50),
+            mediaButton.widthAnchor.constraint(equalToConstant: 200),
             
             secretwordTextField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             secretwordTextField.centerYAnchor.constraint(equalTo: checkerButton.topAnchor, constant: -25),
@@ -239,6 +257,10 @@ final class FeedViewController: UIViewController {
     
     private func actionNFTCollectionButtonPressed() {
         viewModel.onTapShowNFTCollection()
+    }
+    
+    private func actionMediaButtonPressed() {
+        viewModel.onTapShowMedia()
     }
     
     private func secretwordTextFieldChanged(_: String) {

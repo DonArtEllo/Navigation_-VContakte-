@@ -22,6 +22,8 @@ class RootCoordinator: Coordinator {
         coordinators.append(funnyPictureCoordinator)
         let nFTCollectionCoordinator = configureNFTCollection()
         coordinators.append(nFTCollectionCoordinator)
+        let mediaCoordinator = configureMedia()
+        coordinators.append(mediaCoordinator)
         let loginCoordinator = configureLogin()
         coordinators.append(loginCoordinator)
 
@@ -32,6 +34,7 @@ class RootCoordinator: Coordinator {
         feedCoordinator.start()
         funnyPictureCoordinator.start()
         nFTCollectionCoordinator.start()
+        mediaCoordinator.start()
         loginCoordinator.start()
     }
     
@@ -66,6 +69,17 @@ class RootCoordinator: Coordinator {
         
         let coordinator = NFTCollectionCoordinator(
             navigation: navigationNFTC,
+            factory: factory)
+        
+        return coordinator
+    }
+    
+    private func configureMedia() -> MediaCoordinator {
+        
+        let navigationMedia = UINavigationController()
+        
+        let coordinator = MediaCoordinator(
+            navigation: navigationMedia,
             factory: factory)
         
         return coordinator
