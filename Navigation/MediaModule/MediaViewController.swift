@@ -13,7 +13,7 @@ import AVKit
 class MediaViewController: UIViewController {
     
     private var viewModel: MediaViewOutput
-    private var Player = AVAudioPlayer()
+    private var player = AVAudioPlayer()
     private var currentSong = 0
     
     // MARK: - 1-5
@@ -95,6 +95,17 @@ class MediaViewController: UIViewController {
         songNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return songNameLabel
     }()
+    
+    private lazy var voiceRecorderButton: UpgradedButton = {
+        let voiceRecorderButton = UpgradedButton(titleText: "Open Voice Recorder", titleColor: .red, backgroundColor: .gray, tapAction: self.actionVoiceRecorderButtonPressed)
+
+        voiceRecorderButton.layer.cornerRadius = 10
+        voiceRecorderButton.layer.borderWidth = 1
+        voiceRecorderButton.layer.borderColor = UIColor.red.cgColor
+        voiceRecorderButton.layer.masksToBounds = true
+        
+        return voiceRecorderButton
+    }()
 
     // MARK: - Init
     init(viewModel: MediaViewOutput) {
@@ -129,7 +140,8 @@ class MediaViewController: UIViewController {
             stopButton,
             nextTrackButton,
             videosTableView,
-            songNameLabel
+            songNameLabel,
+            voiceRecorderButton
         )
         
         let constraints = [
@@ -167,6 +179,11 @@ class MediaViewController: UIViewController {
             nextTrackButton.centerYAnchor.constraint(equalTo: playButton.centerYAnchor),
             nextTrackButton.heightAnchor.constraint(equalToConstant: 60),
             nextTrackButton.widthAnchor.constraint(equalToConstant: 60),
+            
+            voiceRecorderButton.centerXAnchor.constraint(equalTo: videosTableView.centerXAnchor),
+            voiceRecorderButton.topAnchor.constraint(equalTo: videosTableView.bottomAnchor, constant: 25),
+            voiceRecorderButton.heightAnchor.constraint(equalToConstant: 50),
+            voiceRecorderButton.widthAnchor.constraint(equalToConstant: 250)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -182,8 +199,8 @@ class MediaViewController: UIViewController {
     
     private func prepareSong() {
         do {
-            Player = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: viewModel.songsURLs[currentSong], ofType: "mp3")!))
-            Player.prepareToPlay()
+            player = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: viewModel.songsURLs[currentSong], ofType: "mp3")!))
+            player.prepareToPlay()
             songNameLabel.text = viewModel.songsURLs[currentSong]
         }
         catch {
@@ -193,24 +210,24 @@ class MediaViewController: UIViewController {
     
     // Tap on Play
     @objc private func tapOnPlayButton() {
-        Player.play()
+        player.play()
     }
 
     // Tap on Stop
     @objc private func tapOnStopButton() {
-        if Player.isPlaying {
-            Player.stop()
-            Player.currentTime = 0
+        if player.isPlaying {
+            player.stop()
+            player.currentTime = 0
         }
         else {
-            Player.currentTime = 0
+            player.currentTime = 0
         }
     }
     
     // Tap on Pause
     @objc private func tapOnPauseButton() {
-        if Player.isPlaying {
-            Player.stop()
+        if player.isPlaying {
+            player.stop()
         }
         else {
             print("Already paused!")
@@ -219,7 +236,7 @@ class MediaViewController: UIViewController {
     
     // Tap on Next Song
     @objc private func tapOnNextSongButton() {
-        Player.stop()
+        player.stop()
         currentSong += 1
         if currentSong == 6 {
             currentSong = 0
@@ -230,13 +247,18 @@ class MediaViewController: UIViewController {
     
     // Tap on Previous Song
     @objc private func tapOnPrevSongButton() {
-        Player.stop()
+        player.stop()
         currentSong -= 1
         if currentSong == -1 {
             currentSong = 5
         }
         prepareSong()
         print(currentSong)
+    }
+    
+    // Tap to open Voice Recorder View Controller
+    private func actionVoiceRecorderButtonPressed() {
+        viewModel.onTapShowVoiceRecorder()
     }
 }
 

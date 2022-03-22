@@ -146,8 +146,6 @@ final class FeedViewController: UIViewController {
     
     private lazy var funnyPictureButton: UpgradedButton = {
         let button = UpgradedButton(titleText: "Don't be sad", titleColor: .black, backgroundColor: .yellow, tapAction: self.actionFunnyPictureButtonPressed)
-        button.setTitleColor(.black, for: .selected)
-        button.setTitleColor(.black, for: .highlighted)
         
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
@@ -159,8 +157,6 @@ final class FeedViewController: UIViewController {
     
     private lazy var nFTCollectionButton: UpgradedButton = {
         let button = UpgradedButton(titleText: "PRESS ME", titleColor: .black, backgroundColor: .cyan, tapAction: self.actionNFTCollectionButtonPressed)
-        button.setTitleColor(.black, for: .selected)
-        button.setTitleColor(.black, for: .highlighted)
         
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
@@ -172,9 +168,7 @@ final class FeedViewController: UIViewController {
     
     private lazy var mediaButton: UpgradedButton = {
         let button = UpgradedButton(titleText: "Go to Media", titleColor: .black, backgroundColor: .white, tapAction: self.actionMediaButtonPressed)
-        button.setTitleColor(.black, for: .selected)
-        button.setTitleColor(.black, for: .highlighted)
-        
+       
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.cgColor

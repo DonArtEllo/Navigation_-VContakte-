@@ -26,6 +26,11 @@ final class MediaCoordinator: Coordinator {
     func start() {
         navigationController.pushViewController(self.mediaModule.controller, animated: true)
 
+        mediaModule.viewModel.onShowVoiceRecorder = {
+            
+            let voiceRecorderCoordinator = VoiceRecorderCoordinator(navigation: self.navigationController, factory: self.factory)
+            voiceRecorderCoordinator.start()
+        }
 
         mediaModule.viewModel.onShowFeed = {
             self.navigationController.popToRootViewController(animated: true)

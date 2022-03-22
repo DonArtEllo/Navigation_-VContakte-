@@ -30,6 +30,9 @@
 		8C0542C927C65ABB00C439D2 /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C327C65ABB00C439D2 /* Queen.mp3 */; };
 		8C0542CA27C65ABB00C439D2 /* BURN.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C427C65ABB00C439D2 /* BURN.mp3 */; };
 		8C0542CB27C65ABB00C439D2 /* MorningDay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C527C65ABB00C439D2 /* MorningDay.mp3 */; };
+		8C0542CE27C6B60200C439D2 /* VoiceRecorderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542CD27C6B60200C439D2 /* VoiceRecorderModel.swift */; };
+		8C0542D027C6B66700C439D2 /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542CF27C6B66700C439D2 /* VoiceRecorderViewController.swift */; };
+		8C0542D227C6B77400C439D2 /* VoiceRecorderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542D127C6B77400C439D2 /* VoiceRecorderCoordinator.swift */; };
 		8C0C0498267D2BA50013F764 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0497267D2BA50013F764 /* Checker.swift */; };
 		8C0C049A267D2BCD0013F764 /* CryptoPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0499267D2BCD0013F764 /* CryptoPass.swift */; };
 		8C17A06A2613A0E100761ABB /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17A0692613A0E100761ABB /* LogInController.swift */; };
@@ -124,6 +127,9 @@
 		8C0542C327C65ABB00C439D2 /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
 		8C0542C427C65ABB00C439D2 /* BURN.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BURN.mp3; sourceTree = "<group>"; };
 		8C0542C527C65ABB00C439D2 /* MorningDay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MorningDay.mp3; sourceTree = "<group>"; };
+		8C0542CD27C6B60200C439D2 /* VoiceRecorderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderModel.swift; sourceTree = "<group>"; };
+		8C0542CF27C6B66700C439D2 /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
+		8C0542D127C6B77400C439D2 /* VoiceRecorderCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderCoordinator.swift; sourceTree = "<group>"; };
 		8C0C0497267D2BA50013F764 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		8C0C0499267D2BCD0013F764 /* CryptoPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPass.swift; sourceTree = "<group>"; };
 		8C17A0692613A0E100761ABB /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
@@ -253,6 +259,7 @@
 				8C0542AE27C63D8600C439D2 /* MediaModel.swift */,
 				8C0542B027C63DBC00C439D2 /* MediaViewController.swift */,
 				8C0542B227C644A400C439D2 /* VideosTableViewCell.swift */,
+				8C0542CC27C6B5E000C439D2 /* VoiceRecorderModule */,
 			);
 			path = MediaModule;
 			sourceTree = "<group>";
@@ -279,6 +286,15 @@
 				8C0542C227C65ABA00C439D2 /* SaveMe.mp3 */,
 			);
 			path = Music;
+			sourceTree = "<group>";
+		};
+		8C0542CC27C6B5E000C439D2 /* VoiceRecorderModule */ = {
+			isa = PBXGroup;
+			children = (
+				8C0542CD27C6B60200C439D2 /* VoiceRecorderModel.swift */,
+				8C0542CF27C6B66700C439D2 /* VoiceRecorderViewController.swift */,
+			);
+			path = VoiceRecorderModule;
 			sourceTree = "<group>";
 		};
 		8C0C0496267D2B7D0013F764 /* PasswordService */ = {
@@ -317,6 +333,7 @@
 				8C422C57274ECE40009668AF /* NFTCollectionCoordinator.swift */,
 				8C0542B427C6594700C439D2 /* MediaCoordinator.swift */,
 				8C87D61E26B165A000439C3E /* LoginCoordinator.swift */,
+				8C0542D127C6B77400C439D2 /* VoiceRecorderCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -630,6 +647,7 @@
 				8C422C58274ECE40009668AF /* NFTCollectionCoordinator.swift in Sources */,
 				8C2E8CDA26751FB200371B29 /* User.swift in Sources */,
 				8CAD16DB271D84C4000A0E7D /* FunnyPictureViewController.swift in Sources */,
+				8C0542D227C6B77400C439D2 /* VoiceRecorderCoordinator.swift in Sources */,
 				8C87D62126B17F9A00439C3E /* ControllerFactory.swift in Sources */,
 				8CAD16DD271EEE6F000A0E7D /* FunnyPictureCoordinator.swift in Sources */,
 				8C87D61F26B165A000439C3E /* LoginCoordinator.swift in Sources */,
@@ -637,6 +655,7 @@
 				8C66E6602625AAE900B697C0 /* ProfileTableViewCell.swift in Sources */,
 				8C2E8CDC26752B6900371B29 /* CurrentUserService.swift in Sources */,
 				8C0C0498267D2BA50013F764 /* Checker.swift in Sources */,
+				8C0542CE27C6B60200C439D2 /* VoiceRecorderModel.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				8C515F92260F5186000BE417 /* ProfileTableHeaderView.swift in Sources */,
 				8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */,
@@ -660,6 +679,7 @@
 				8C515F95260F51B0000BE417 /* ProfileViewController.swift in Sources */,
 				8C0542AF27C63D8700C439D2 /* MediaModel.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
+				8C0542D027C6B66700C439D2 /* VoiceRecorderViewController.swift in Sources */,
 				8C422C5D274ED779009668AF /* NFTCollectionViewController.swift in Sources */,
 				8CAD16D9271D849B000A0E7D /* FunnyPictureModel.swift in Sources */,
 			);
