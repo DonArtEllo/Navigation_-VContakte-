@@ -7,22 +7,16 @@
 //
 
 import UIKit
+import StorageService
+import SnapKit
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
-    
-    // MARK: Data from Storage
-    var section: ProfilePage? {
-        didSet {
-            avatarImageView.image = section?.avatar
-            fullNameLabel.text = section?.fullName
-        }
-    }
     
     private var statusText: String = "Searching for your IP..."
     
     // MARK: - Profile Header Content
     // User's profile image
-    public var avatarImageView: UIImageView = {
+    internal var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.clipsToBounds = true
@@ -36,7 +30,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     }()
     
     // User's profile name
-    private let fullNameLabel: UILabel = {
+    internal let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         fullNameLabel.textColor = .black
@@ -85,29 +79,21 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
         return statusTextField
     }()
-    
+
     // Status button
-    private let setStatusButton: UIButton = {
-        let setStatusButton = UIButton()
-        setStatusButton.setTitle("Show status", for: .normal)
-        setStatusButton.setTitleColor(.white, for: .normal)
-        setStatusButton.backgroundColor = .systemBlue
-            
+    private lazy var setStatusButton: UpgradedButton = {
+        let setStatusButton = UpgradedButton(titleText: "Show status", titleColor: .white, backgroundColor: .systemBlue, tapAction: self.actionSetStatusButtonPressed)
         setStatusButton.layer.cornerRadius = 4
         setStatusButton.layer.shadowRadius = 4
         setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         setStatusButton.layer.shadowColor = UIColor.black.cgColor
         setStatusButton.layer.shadowOpacity = 0.7
         
-        setStatusButton.addTarget(self, action: #selector(actionSetStatusButtonPressed), for: .touchUpInside)
-        
-        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
-
         return setStatusButton
     }()
     
     // MARK: Actions
-    @objc private func actionSetStatusButtonPressed() {
+    private func actionSetStatusButtonPressed() {
         statusTextField.endEditing(true)
         if statusText == "" {
             statusText = "No status"
@@ -144,7 +130,12 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - SetupViews
     fileprivate func setupViews() {
+        
+        #if DEBUG
+        contentView.backgroundColor = .systemYellow
+        #else
         contentView.backgroundColor = .systemGray6
+        #endif
         
         contentView.addSubview(avatarImageView)
         contentView.addSubview(fullNameLabel)
@@ -156,39 +147,35 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         statusLabel.sizeToFit()
         
         // MARK: Constraints
-        let buttonWidth = setStatusButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32)
-        buttonWidth.priority = .defaultHigh
+        avatarImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(contentView.snp.width).multipliedBy(0.3)
+            make.top.equalTo(contentView).offset(16)
+            make.leading.equalTo(contentView).offset(16).priority(750)
+        }
         
-        let fullNameLeading =
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16)
-        fullNameLeading.priority = .defaultHigh
+        fullNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(27)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+        }
         
-        let constraints = [
-            
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            
-            fullNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 27),
-            fullNameLeading,
-            
-            statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -18),
-            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
-            statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor),
-            statusTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 48),
-            setStatusButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            buttonWidth,
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
-            
-        ]
+        statusLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(avatarImageView).offset(-18)
+            make.leading.equalTo(fullNameLabel)
+        }
         
-        NSLayoutConstraint.activate(constraints)
+        statusTextField.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.top.equalTo(statusLabel.snp.bottom).offset(8)
+            make.leading.equalTo(statusLabel)
+            make.trailing.equalTo(contentView).offset(-16)
+        }
+        
+        setStatusButton.snp.makeConstraints { make in
+            make.width.equalTo(contentView).offset(-32).priority(750)
+            make.height.equalTo(50)
+            make.top.equalTo(avatarImageView.snp.bottom).offset(48)
+            make.leading.equalTo(contentView).offset(16)
+        }
         
     }
 

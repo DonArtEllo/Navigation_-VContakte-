@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import StorageService
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     // MARK: Data from Storage
-    var photo: Photo? {
+    var photo: UIImage? {
         didSet {
-            imageContentImageView.image = UIImage(imageLiteralResourceName: photo?.image ?? "error")
+            imageContentImageView.image = photo
         }
     }
     

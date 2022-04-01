@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import StorageService
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
     private var userNotLoggedInMark = true
     private var animationWasShownMark = true
-    private var logInViewController = LogInViewController()
     private let reusedID = "cellID"
+    
+    private var currentUser: User?
+    private let currentUserLogin: String
+    private let userService: UserService
     
     private let profilePostsTableView = UITableView(frame: .zero, style: .grouped)
     
     private let headerView = ProfileTableHeaderView()
+    
+    private let asyncProcessor = ProfileAsyncProcessor()
+    
+    private let facade = ImagePublisherFacade()
+    var collection: [UIImage] = []
     
     private var fullscreenBackgroundView: UIView = {
         let fullscreenBackgroundView = UIView()
@@ -30,7 +40,6 @@ class ProfileViewController: UIViewController {
     
     private var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
-        avatarImageView.image = #imageLiteral(resourceName: "cat")
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.clipsToBounds = true
             
@@ -54,8 +63,32 @@ class ProfileViewController: UIViewController {
         return crossImage
     }()
     
+    // MARK: - Init
+    init(userService: UserService, typedLogin: String) {
+        
+        self.userService = userService
+        self.currentUserLogin = typedLogin
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkUserExistance(user: currentUserLogin)
+        
+        self.avatarImageView.image = currentUser?.userAvatar
+
+        #if DEBUG
+        view.backgroundColor = .systemRed
+        #else
+        view.backgroundColor = .systemGray6
+        #endif
 
         setupConstraints()
         setupTableView()
@@ -70,20 +103,11 @@ class ProfileViewController: UIViewController {
         
         avatarImageView.layer.cornerRadius = view.bounds.width * 0.3 / 2
         
-        if (userNotLoggedInMark) {
-            logInViewOpener()
-        }
-    }
-    
-    // MARK: LogInView
-    private func logInViewOpener() {
-        navigationController?.pushViewController(logInViewController, animated: true)
-        userNotLoggedInMark = false
     }
     
     private func setupTableView() {
+        navigationController?.tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = true
-        view.backgroundColor = .systemGray6
         
         profilePostsTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
         profilePostsTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: reusedID)
@@ -93,6 +117,38 @@ class ProfileViewController: UIViewController {
         )
         profilePostsTableView.dataSource = self
         profilePostsTableView.delegate = self
+    }
+    
+    private func checkUserExistance(user: String){
+        do {
+            self.currentUser = try userService.currentUser(userLogin: user)
+        } catch LoginError.serverError {
+            let error = "User not found"
+            
+            DispatchQueue.main.async { [self] in
+                let alertController = UIAlertController(title: error, message: "Something went wrong on the server side. Please, try to log in again", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                    print(error)
+                    navigationController?.popViewController(animated: true)
+                }
+                alertController.addAction(okAction)
+            
+                present(alertController, animated: true, completion: nil)
+            }
+        } catch {
+            let error = "Unknown error been cathced"
+            
+            DispatchQueue.main.async { [self] in
+                let alertController = UIAlertController(title: error, message: "Something went wrong. Please, reload the app", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                    print(error)
+                    fatalError(error)
+                }
+                alertController.addAction(okAction)
+            
+                present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: Setup Constraints
@@ -365,6 +421,27 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             postsSectionTableViewCell.post = post
             
+            // MARK: New logic with cache
+            let identifier = indexPath.row
+            postsSectionTableViewCell.representedIdentifier = identifier
+            
+            if (asyncProcessor.processedImages[identifier] != nil) {
+                postsSectionTableViewCell.configure(with: asyncProcessor.processedImages[identifier]!)
+            } else {
+                asyncProcessor.process(for: identifier) { image in
+                    guard let image = image else {
+                        return
+                    }
+                    // check identifier
+                    guard postsSectionTableViewCell.representedIdentifier == identifier else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        postsSectionTableViewCell.configure(with: image)
+                    }
+                }
+            }
             return postsSectionTableViewCell
         }
     }
@@ -372,7 +449,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = self.headerView
 
-        headerView.section = Storage.postsTabel[section]
+        let user = currentUser
+        
+        headerView.avatarImageView.image = user?.userAvatar
+        headerView.fullNameLabel.text = user?.userName
 
         return headerView
       }
@@ -380,7 +460,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if (indexPath.section == 0) {
+            
             let photoCollectionViewController = PhotosViewController()
+            
+            Storage.photosTabel.forEach {
+                collection.append(UIImage(imageLiteralResourceName: $0.image))
+            }
+            
+            photoCollectionViewController.imagePublisherFacade = facade
+            
+            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 1.5, repeat: 30, userImages: collection)
+            
             navigationController?.pushViewController(photoCollectionViewController, animated: true)
         } else {
             return
