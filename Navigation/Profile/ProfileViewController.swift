@@ -119,7 +119,6 @@ class ProfileViewController: UIViewController {
         profilePostsTableView.delegate = self
     }
     
-    // MARK: - 3
     private func checkUserExistance(user: String){
         do {
             self.currentUser = try userService.currentUser(userLogin: user)

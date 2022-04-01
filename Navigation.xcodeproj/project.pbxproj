@@ -15,7 +15,24 @@
 		060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C5250CEB0A00A87020 /* InfoViewController.swift */; };
 		060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C7250CEE5D00A87020 /* PostViewController.swift */; };
 		514984005207DAE4508EC9E3 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9C1FAD924F28887A5707B0 /* Pods_Navigation.framework */; };
-		8C05428F27B82E3400C439D2 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C05428E27B82E3400C439D2 /* iOSIntPackage */; };
+		8C0542AA27C21D0F00C439D2 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0542A927C21D0F00C439D2 /* iOSIntPackage */; };
+		8C0542AF27C63D8700C439D2 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542AE27C63D8600C439D2 /* MediaModel.swift */; };
+		8C0542B127C63DBC00C439D2 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542B027C63DBC00C439D2 /* MediaViewController.swift */; };
+		8C0542B327C644A400C439D2 /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542B227C644A400C439D2 /* VideosTableViewCell.swift */; };
+		8C0542B527C6594700C439D2 /* MediaCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542B427C6594700C439D2 /* MediaCoordinator.swift */; };
+		8C0542BC27C65AAD00C439D2 /* Jake.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542B827C65AA600C439D2 /* Jake.mp4 */; };
+		8C0542BD27C65AAD00C439D2 /* Smart.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542B927C65AA600C439D2 /* Smart.mp4 */; };
+		8C0542BE27C65AAD00C439D2 /* JakeOHM.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542BA27C65AA900C439D2 /* JakeOHM.mp4 */; };
+		8C0542BF27C65AAD00C439D2 /* PHXNKPLAYA.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542BB27C65AAC00C439D2 /* PHXNKPLAYA.mp4 */; };
+		8C0542C627C65ABB00C439D2 /* IAmDead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C027C65ABA00C439D2 /* IAmDead.mp3 */; };
+		8C0542C727C65ABB00C439D2 /* LoFiChillHop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C127C65ABA00C439D2 /* LoFiChillHop.mp3 */; };
+		8C0542C827C65ABB00C439D2 /* SaveMe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C227C65ABA00C439D2 /* SaveMe.mp3 */; };
+		8C0542C927C65ABB00C439D2 /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C327C65ABB00C439D2 /* Queen.mp3 */; };
+		8C0542CA27C65ABB00C439D2 /* BURN.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C427C65ABB00C439D2 /* BURN.mp3 */; };
+		8C0542CB27C65ABB00C439D2 /* MorningDay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C0542C527C65ABB00C439D2 /* MorningDay.mp3 */; };
+		8C0542CE27C6B60200C439D2 /* VoiceRecorderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542CD27C6B60200C439D2 /* VoiceRecorderModel.swift */; };
+		8C0542D027C6B66700C439D2 /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542CF27C6B66700C439D2 /* VoiceRecorderViewController.swift */; };
+		8C0542D227C6B77400C439D2 /* VoiceRecorderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0542D127C6B77400C439D2 /* VoiceRecorderCoordinator.swift */; };
 		8C0C0498267D2BA50013F764 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0497267D2BA50013F764 /* Checker.swift */; };
 		8C0C049A267D2BCD0013F764 /* CryptoPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C0499267D2BCD0013F764 /* CryptoPass.swift */; };
 		8C17A06A2613A0E100761ABB /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17A0692613A0E100761ABB /* LogInController.swift */; };
@@ -96,6 +113,23 @@
 		5D681F2619EB9BB9AD9EBE1F /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		5F9C1FAD924F28887A5707B0 /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D788D21EC899863E9087B0 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
+		8C0542AE27C63D8600C439D2 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
+		8C0542B027C63DBC00C439D2 /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		8C0542B227C644A400C439D2 /* VideosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
+		8C0542B427C6594700C439D2 /* MediaCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCoordinator.swift; sourceTree = "<group>"; };
+		8C0542B827C65AA600C439D2 /* Jake.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jake.mp4; sourceTree = "<group>"; };
+		8C0542B927C65AA600C439D2 /* Smart.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Smart.mp4; sourceTree = "<group>"; };
+		8C0542BA27C65AA900C439D2 /* JakeOHM.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = JakeOHM.mp4; sourceTree = "<group>"; };
+		8C0542BB27C65AAC00C439D2 /* PHXNKPLAYA.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PHXNKPLAYA.mp4; sourceTree = "<group>"; };
+		8C0542C027C65ABA00C439D2 /* IAmDead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = IAmDead.mp3; sourceTree = "<group>"; };
+		8C0542C127C65ABA00C439D2 /* LoFiChillHop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LoFiChillHop.mp3; sourceTree = "<group>"; };
+		8C0542C227C65ABA00C439D2 /* SaveMe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SaveMe.mp3; sourceTree = "<group>"; };
+		8C0542C327C65ABB00C439D2 /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
+		8C0542C427C65ABB00C439D2 /* BURN.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BURN.mp3; sourceTree = "<group>"; };
+		8C0542C527C65ABB00C439D2 /* MorningDay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MorningDay.mp3; sourceTree = "<group>"; };
+		8C0542CD27C6B60200C439D2 /* VoiceRecorderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderModel.swift; sourceTree = "<group>"; };
+		8C0542CF27C6B66700C439D2 /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
+		8C0542D127C6B77400C439D2 /* VoiceRecorderCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderCoordinator.swift; sourceTree = "<group>"; };
 		8C0C0497267D2BA50013F764 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		8C0C0499267D2BCD0013F764 /* CryptoPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPass.swift; sourceTree = "<group>"; };
 		8C17A0692613A0E100761ABB /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
@@ -140,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C05428F27B82E3400C439D2 /* iOSIntPackage in Frameworks */,
+				8C0542AA27C21D0F00C439D2 /* iOSIntPackage in Frameworks */,
 				8CD6FA58266930E800B23BC7 /* StorageService.framework in Frameworks */,
 				514984005207DAE4508EC9E3 /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -190,6 +224,7 @@
 				8C87D62526B185B700439C3E /* FeedModule */,
 				8CAD16D7271D846E000A0E7D /* FunnyPictureModule */,
 				8C422C59274ECEA7009668AF /* NFTCollectionModule */,
+				8C0542AD27C63D0400C439D2 /* MediaModule */,
 				8C87D62226B1801900439C3E /* LogInModule */,
 				8C0C0496267D2B7D0013F764 /* PasswordService */,
 				8CA8846C27733B440005B405 /* BruteForce */,
@@ -214,6 +249,52 @@
 				90DD5A192DA1D88BD18B6840 /* Pods_StorageService.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8C0542AD27C63D0400C439D2 /* MediaModule */ = {
+			isa = PBXGroup;
+			children = (
+				8C0542B727C65A7A00C439D2 /* Music */,
+				8C0542B627C65A6F00C439D2 /* Videos */,
+				8C0542AE27C63D8600C439D2 /* MediaModel.swift */,
+				8C0542B027C63DBC00C439D2 /* MediaViewController.swift */,
+				8C0542B227C644A400C439D2 /* VideosTableViewCell.swift */,
+				8C0542CC27C6B5E000C439D2 /* VoiceRecorderModule */,
+			);
+			path = MediaModule;
+			sourceTree = "<group>";
+		};
+		8C0542B627C65A6F00C439D2 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				8C0542B827C65AA600C439D2 /* Jake.mp4 */,
+				8C0542BA27C65AA900C439D2 /* JakeOHM.mp4 */,
+				8C0542BB27C65AAC00C439D2 /* PHXNKPLAYA.mp4 */,
+				8C0542B927C65AA600C439D2 /* Smart.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		8C0542B727C65A7A00C439D2 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				8C0542C427C65ABB00C439D2 /* BURN.mp3 */,
+				8C0542C027C65ABA00C439D2 /* IAmDead.mp3 */,
+				8C0542C127C65ABA00C439D2 /* LoFiChillHop.mp3 */,
+				8C0542C527C65ABB00C439D2 /* MorningDay.mp3 */,
+				8C0542C327C65ABB00C439D2 /* Queen.mp3 */,
+				8C0542C227C65ABA00C439D2 /* SaveMe.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		8C0542CC27C6B5E000C439D2 /* VoiceRecorderModule */ = {
+			isa = PBXGroup;
+			children = (
+				8C0542CD27C6B60200C439D2 /* VoiceRecorderModel.swift */,
+				8C0542CF27C6B66700C439D2 /* VoiceRecorderViewController.swift */,
+			);
+			path = VoiceRecorderModule;
 			sourceTree = "<group>";
 		};
 		8C0C0496267D2B7D0013F764 /* PasswordService */ = {
@@ -250,7 +331,9 @@
 				8C87D61C26A9988800439C3E /* FeedCoordinator.swift */,
 				8CAD16DC271EEE6F000A0E7D /* FunnyPictureCoordinator.swift */,
 				8C422C57274ECE40009668AF /* NFTCollectionCoordinator.swift */,
+				8C0542B427C6594700C439D2 /* MediaCoordinator.swift */,
 				8C87D61E26B165A000439C3E /* LoginCoordinator.swift */,
+				8C0542D127C6B77400C439D2 /* VoiceRecorderCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -392,7 +475,7 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-				8C05428E27B82E3400C439D2 /* iOSIntPackage */,
+				8C0542A927C21D0F00C439D2 /* iOSIntPackage */,
 			);
 			productName = Navigation;
 			productReference = 060782AE250CE27700A87020 /* Navigation.app */;
@@ -445,7 +528,7 @@
 			);
 			mainGroup = 060782A5250CE27700A87020;
 			packageReferences = (
-				8C05428D27B82E3400C439D2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				8C0542A827C21D0F00C439D2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 			);
 			productRefGroup = 060782AF250CE27700A87020 /* Products */;
 			projectDirPath = "";
@@ -462,8 +545,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C0542C627C65ABB00C439D2 /* IAmDead.mp3 in Resources */,
+				8C0542C827C65ABB00C439D2 /* SaveMe.mp3 in Resources */,
 				060782BE250CE27A00A87020 /* LaunchScreen.storyboard in Resources */,
+				8C0542BF27C65AAD00C439D2 /* PHXNKPLAYA.mp4 in Resources */,
+				8C0542C727C65ABB00C439D2 /* LoFiChillHop.mp3 in Resources */,
+				8C0542CA27C65ABB00C439D2 /* BURN.mp3 in Resources */,
 				060782BB250CE27A00A87020 /* Assets.xcassets in Resources */,
+				8C0542BC27C65AAD00C439D2 /* Jake.mp4 in Resources */,
+				8C0542CB27C65ABB00C439D2 /* MorningDay.mp3 in Resources */,
+				8C0542C927C65ABB00C439D2 /* Queen.mp3 in Resources */,
+				8C0542BD27C65AAD00C439D2 /* Smart.mp4 in Resources */,
+				8C0542BE27C65AAD00C439D2 /* JakeOHM.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +647,7 @@
 				8C422C58274ECE40009668AF /* NFTCollectionCoordinator.swift in Sources */,
 				8C2E8CDA26751FB200371B29 /* User.swift in Sources */,
 				8CAD16DB271D84C4000A0E7D /* FunnyPictureViewController.swift in Sources */,
+				8C0542D227C6B77400C439D2 /* VoiceRecorderCoordinator.swift in Sources */,
 				8C87D62126B17F9A00439C3E /* ControllerFactory.swift in Sources */,
 				8CAD16DD271EEE6F000A0E7D /* FunnyPictureCoordinator.swift in Sources */,
 				8C87D61F26B165A000439C3E /* LoginCoordinator.swift in Sources */,
@@ -561,6 +655,7 @@
 				8C66E6602625AAE900B697C0 /* ProfileTableViewCell.swift in Sources */,
 				8C2E8CDC26752B6900371B29 /* CurrentUserService.swift in Sources */,
 				8C0C0498267D2BA50013F764 /* Checker.swift in Sources */,
+				8C0542CE27C6B60200C439D2 /* VoiceRecorderModel.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				8C515F92260F5186000BE417 /* ProfileTableHeaderView.swift in Sources */,
 				8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */,
@@ -570,16 +665,21 @@
 				8C1A88AE269B356F0043AEF3 /* RootCoordinator.swift in Sources */,
 				8C422C5B274ED766009668AF /* NFTCollectionModel.swift in Sources */,
 				8C422C5F274ED790009668AF /* NFTCollectionImageCollectionViewCell.swift in Sources */,
+				8C0542B327C644A400C439D2 /* VideosTableViewCell.swift in Sources */,
+				8C0542B527C6594700C439D2 /* MediaCoordinator.swift in Sources */,
 				8C1A88812689DA840043AEF3 /* UpgradedTextField.swift in Sources */,
 				8C1A88B3269B36850043AEF3 /* TabBarController.swift in Sources */,
 				8C32F2C6262C8F9500CC3B65 /* PhotosCollectionViewCell.swift in Sources */,
 				8C2E8CDE26752C6800371B29 /* TestUserService.swift in Sources */,
 				8C32F2C3262C84E800CC3B65 /* PhotosViewController.swift in Sources */,
 				8C87D61D26A9988800439C3E /* FeedCoordinator.swift in Sources */,
+				8C0542B127C63DBC00C439D2 /* MediaViewController.swift in Sources */,
 				8C1A88842689DAE80043AEF3 /* FeedModel.swift in Sources */,
 				8C87D62426B1805900439C3E /* LogInViewModel.swift in Sources */,
 				8C515F95260F51B0000BE417 /* ProfileViewController.swift in Sources */,
+				8C0542AF27C63D8700C439D2 /* MediaModel.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
+				8C0542D027C6B66700C439D2 /* VoiceRecorderViewController.swift in Sources */,
 				8C422C5D274ED779009668AF /* NFTCollectionViewController.swift in Sources */,
 				8CAD16D9271D849B000A0E7D /* FunnyPictureModel.swift in Sources */,
 			);
@@ -865,7 +965,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8C05428D27B82E3400C439D2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+		8C0542A827C21D0F00C439D2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
 			requirement = {
@@ -876,9 +976,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8C05428E27B82E3400C439D2 /* iOSIntPackage */ = {
+		8C0542A927C21D0F00C439D2 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C05428D27B82E3400C439D2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			package = 8C0542A827C21D0F00C439D2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */

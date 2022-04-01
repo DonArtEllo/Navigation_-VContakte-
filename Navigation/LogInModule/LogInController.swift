@@ -8,11 +8,9 @@
 
 import UIKit
 
-// MARK: - 1-2
 enum LoginError: Error {
     
     
-    // MARK: - 1-3
     case userNotFound
     case wrongPassword
     case serverError
@@ -161,7 +159,6 @@ class LogInController: UIViewController {
         activitiIndicator.startAnimating()
         globalQueue.async {
             
-            // MARK: - 1-4
             self.passwordHacker.bruteForce { result in
                 switch result {
                 case .success(let forcedPassword):
@@ -218,7 +215,6 @@ class LogInController: UIViewController {
                 if currentUser.userAvatar != UIImage() {
                 
                     let currentMoment = Date()
-                    // MARK: - 4
                     guard let checkedLogin = typedLogin else {
                         preconditionFailure()
                     }

@@ -37,6 +37,12 @@ final class FeedCoordinator: Coordinator {
             nFTCollectionCoordinator.start()
         }
         
+        feedModule.viewModel.onShowMedia = {
+            
+            let mediaCoordinator = MediaCoordinator(navigation: self.navigationController, factory: self.factory)
+            mediaCoordinator.start()
+        }
+        
         navigationController.pushViewController(feedModule.controller, animated: true)
     }
 }
