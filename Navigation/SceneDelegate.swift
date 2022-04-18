@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-//    private let loginFactory = MyLogInFactory()
     let rootCoordinator = RootCoordinator()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -22,9 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        
-//        loginController.delegate = loginFactory.setLogInInspector()
-        
+                
         window?.rootViewController = rootCoordinator.tabBarController
         
         window?.makeKeyAndVisible()

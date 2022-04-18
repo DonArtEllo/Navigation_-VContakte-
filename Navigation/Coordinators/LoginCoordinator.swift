@@ -25,34 +25,3 @@ final class LoginCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
-
-//final class LoginCoordinator: Coordinator {
-//    var coordinators: [Coordinator] = []
-//    let navigationController: UINavigationController
-//
-//    private let factory: ControllerFactory
-//    private lazy var loginModule = {
-//        factory.makeLogIn()
-//    }()
-//    private var loginModel: LogInViewOutput
-//
-//    init(navigation: UINavigationController, factory: ControllerFactory) {
-//        self.navigationController = navigation
-//        self.factory = factory
-//    }
-//
-//    func start() {
-//
-//        loginModule.viewModel.onShowProfile = { [weak self] in
-//            guard let controller = self?.configureProfile(<#UserService#>, <#String#>) else { return }
-//            self?.navigationController.pushViewController(controller, animated: true)
-//
-//        }
-//
-//        navigationController.pushViewController(loginModule.controller, animated: true)
-//    }
-//    
-//    private func configureProfile(_ userService: UserService, _ typedLogin: String) -> ProfileViewController {
-//        return factory.makeProfile(userService: userService, typedLogin: typedLogin)
-//    }
-//}

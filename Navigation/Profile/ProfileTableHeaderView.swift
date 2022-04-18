@@ -120,7 +120,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         setupViews()
     }
     
-    // MARK:Layout
+    // MARK: Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         

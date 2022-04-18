@@ -17,7 +17,7 @@ protocol MediaViewOutput {
 
 final class MediaModel: MediaViewOutput {
     
-    // MARK: - 1-4 Songs for player
+    // Songs for player
     let songsURLs : [String] = [
         "Queen",
         "BURN",
@@ -27,7 +27,7 @@ final class MediaModel: MediaViewOutput {
         "SaveMe"
     ]
     
-    // MARK: - 1-5 Videos for table
+    // Videos for table
     let videosURLs : [String] = [
         Bundle.main.path(forResource: "Jake", ofType: "mp4")!,
         Bundle.main.path(forResource: "PHXNKPLAYA", ofType: "mp4")!,

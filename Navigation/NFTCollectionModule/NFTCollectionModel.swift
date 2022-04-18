@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import iOSIntPackage
 
 protocol NFTCollectionViewOutput {
     var nftImages: [UIImage] { get }

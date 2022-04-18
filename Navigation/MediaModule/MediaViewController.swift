@@ -16,7 +16,6 @@ class MediaViewController: UIViewController {
     private var player = AVAudioPlayer()
     private var currentSong = 0
     
-    // MARK: - 1-5
     private let videosTableView = UITableView(frame: .zero, style: .grouped)
     
     private var previousTrackButton: UIButton = {
@@ -31,7 +30,6 @@ class MediaViewController: UIViewController {
         return previousTrackButton
     }()
     
-    // MARK: - 1-1
     private var pauseButton: UIButton = {
         let pauseButton = UIButton()
         pauseButton.contentMode = .scaleToFill
@@ -56,7 +54,6 @@ class MediaViewController: UIViewController {
         return playButton
     }()
     
-    // MARK: - 1-2
     private var stopButton: UIButton = {
         let stopButton = UIButton()
         stopButton.contentMode = .scaleToFill
@@ -81,7 +78,6 @@ class MediaViewController: UIViewController {
         return nextTrackButton
     }()
     
-    // MARK: - 1-3
     private let songNameLabel: UILabel = {
         let songNameLabel = UILabel()
         songNameLabel.font = UIFont.boldSystemFont(ofSize: 15)

@@ -79,11 +79,7 @@ class PhotosTableViewCell: UITableViewCell {
             pointerImageView,
             collectionView
         )
-//        scrollView.addSubview(containerView)
-//        containerView.addSubview(collectionView)
-        
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.translatesAutoresizingMaskIntoConstraints = false
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         photosLabel.sizeToFit()
@@ -96,24 +92,7 @@ class PhotosTableViewCell: UITableViewCell {
             
             pointerImageView.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
             pointerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1 * mainIndent),
-            
-//            scrollView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: mainIndent),
-//            scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: mainIndent),
-//            scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1 * mainIndent),
-//            scrollView.heightAnchor.constraint(equalToConstant: (CGFloat(superview?.bounds.width ?? 414) - (mainIndent * 2 + spacer * 3)) / 4),
-//
-//            containerView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-//            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-//            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-//            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            containerView.widthAnchor.constraint(equalToConstant: ((CGFloat(superview?.bounds.width ?? 414) - (mainIndent * 2 + spacer * 3)) / 4) * 20 - spacer * 5),
-//            containerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-//
-//            collectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-//            collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-//            collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-//            collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            
+             
             collectionView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: mainIndent),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: mainIndent),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1 * mainIndent),
