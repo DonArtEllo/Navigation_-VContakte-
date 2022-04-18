@@ -28,6 +28,7 @@ final class FeedViewController: UIViewController {
         print(type(of: self), #function)
         
         setup()
+        NetworkService.getData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
