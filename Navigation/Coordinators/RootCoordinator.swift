@@ -16,6 +16,8 @@ class RootCoordinator: Coordinator {
     init() {
         tabBarController = TabBarController()
         
+        let infoCoordinator = configureInfo()
+        coordinators.append(infoCoordinator)
         let feedCoordinator = configureFeed()
         coordinators.append(feedCoordinator)
         let funnyPictureCoordinator = configureFunnyPicture()
@@ -29,16 +31,32 @@ class RootCoordinator: Coordinator {
         let loginCoordinator = configureLogin()
         coordinators.append(loginCoordinator)
 
-        tabBarController.viewControllers = [feedCoordinator.navigationController,
+        tabBarController.viewControllers = [infoCoordinator.navigationController,
+                                            feedCoordinator.navigationController,
                                             loginCoordinator.navigationController
         ]
         
+        infoCoordinator.start()
         feedCoordinator.start()
         funnyPictureCoordinator.start()
         nFTCollectionCoordinator.start()
         mediaCoordinator.start()
         voiceRecorderCoordinator.start()
         loginCoordinator.start()
+    }
+    
+    private func configureInfo() -> InfoCoordinator {
+        
+        let navigationZero = UINavigationController()
+        navigationZero.tabBarItem = UITabBarItem(
+            title: "Info",
+            image: UIImage(systemName: "info"),
+            selectedImage: nil)
+        let coordinator = InfoCoordinator(
+            navigation: navigationZero,
+            factory: factory)
+        
+        return coordinator
     }
     
     private func configureFeed() -> FeedCoordinator {
