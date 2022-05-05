@@ -58,6 +58,9 @@
 		8C515F95260F51B0000BE417 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C515F94260F51B0000BE417 /* ProfileViewController.swift */; };
 		8C66E6602625AAE900B697C0 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C66E65F2625AAE900B697C0 /* ProfileTableViewCell.swift */; };
 		8C7B1613280D92EC008CA28D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1612280D92EC008CA28D /* NetworkService.swift */; };
+		8C7B16162823A8D4008CA28D /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B16152823A8D4008CA28D /* InfoCoordinator.swift */; };
+		8C7B16192823AA2F008CA28D /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B16182823AA2F008CA28D /* InfoModel.swift */; };
+		8C7B161D2823DA5D008CA28D /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B161C2823DA5D008CA28D /* JSONModels.swift */; };
 		8C87D61D26A9988800439C3E /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D61C26A9988800439C3E /* FeedCoordinator.swift */; };
 		8C87D61F26B165A000439C3E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D61E26B165A000439C3E /* LoginCoordinator.swift */; };
 		8C87D62126B17F9A00439C3E /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D62026B17F9A00439C3E /* ControllerFactory.swift */; };
@@ -156,6 +159,9 @@
 		8C515F94260F51B0000BE417 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8C66E65F2625AAE900B697C0 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		8C7B1612280D92EC008CA28D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		8C7B16152823A8D4008CA28D /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
+		8C7B16182823AA2F008CA28D /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
+		8C7B161C2823DA5D008CA28D /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
 		8C87D61C26A9988800439C3E /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		8C87D61E26B165A000439C3E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		8C87D62026B17F9A00439C3E /* ControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerFactory.swift; sourceTree = "<group>"; };
@@ -221,7 +227,7 @@
 				060782BA250CE27A00A87020 /* Assets.xcassets */,
 				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
 				060782BF250CE27A00A87020 /* Info.plist */,
-				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
+				8C7B16172823AA13008CA28D /* InfoModule */,
 				060782C7250CEE5D00A87020 /* PostViewController.swift */,
 				8C7B1611280D92C1008CA28D /* NetworkService */,
 				8C87D62526B185B700439C3E /* FeedModule */,
@@ -331,6 +337,7 @@
 			children = (
 				8C1A88AF269B35970043AEF3 /* Coordonator.swift */,
 				8C1A88AD269B356E0043AEF3 /* RootCoordinator.swift */,
+				8C7B16152823A8D4008CA28D /* InfoCoordinator.swift */,
 				8C87D61C26A9988800439C3E /* FeedCoordinator.swift */,
 				8CAD16DC271EEE6F000A0E7D /* FunnyPictureCoordinator.swift */,
 				8C422C57274ECE40009668AF /* NFTCollectionCoordinator.swift */,
@@ -383,9 +390,19 @@
 		8C7B1611280D92C1008CA28D /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				8C7B161C2823DA5D008CA28D /* JSONModels.swift */,
 				8C7B1612280D92EC008CA28D /* NetworkService.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		8C7B16172823AA13008CA28D /* InfoModule */ = {
+			isa = PBXGroup;
+			children = (
+				8C7B16182823AA2F008CA28D /* InfoModel.swift */,
+				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
+			);
+			path = InfoModule;
 			sourceTree = "<group>";
 		};
 		8C87D62226B1801900439C3E /* LogInModule */ = {
@@ -657,6 +674,7 @@
 				8CA8846E27733B700005B405 /* PasswordHacker.swift in Sources */,
 				8C422C58274ECE40009668AF /* NFTCollectionCoordinator.swift in Sources */,
 				8C2E8CDA26751FB200371B29 /* User.swift in Sources */,
+				8C7B161D2823DA5D008CA28D /* JSONModels.swift in Sources */,
 				8CAD16DB271D84C4000A0E7D /* FunnyPictureViewController.swift in Sources */,
 				8C0542D227C6B77400C439D2 /* VoiceRecorderCoordinator.swift in Sources */,
 				8C87D62126B17F9A00439C3E /* ControllerFactory.swift in Sources */,
@@ -676,9 +694,11 @@
 				8C1A88AE269B356F0043AEF3 /* RootCoordinator.swift in Sources */,
 				8C422C5B274ED766009668AF /* NFTCollectionModel.swift in Sources */,
 				8C422C5F274ED790009668AF /* NFTCollectionImageCollectionViewCell.swift in Sources */,
+				8C7B16192823AA2F008CA28D /* InfoModel.swift in Sources */,
 				8C0542B327C644A400C439D2 /* VideosTableViewCell.swift in Sources */,
 				8C0542B527C6594700C439D2 /* MediaCoordinator.swift in Sources */,
 				8C1A88812689DA840043AEF3 /* UpgradedTextField.swift in Sources */,
+				8C7B16162823A8D4008CA28D /* InfoCoordinator.swift in Sources */,
 				8C1A88B3269B36850043AEF3 /* TabBarController.swift in Sources */,
 				8C32F2C6262C8F9500CC3B65 /* PhotosCollectionViewCell.swift in Sources */,
 				8C2E8CDE26752C6800371B29 /* TestUserService.swift in Sources */,

@@ -9,6 +9,8 @@
 import UIKit
 
 protocol ControllerFactory {
+    func makeInfo() -> (viewModel: InfoModel, controller: InfoViewController)
+    
     func makeFeed() -> (viewModel: FeedModel, controller: FeedViewController)
     
     func makeFunnyPicture() -> (viewModel: FunnyPictureModel, controller: FunnyPictureViewController)
@@ -21,6 +23,12 @@ protocol ControllerFactory {
 }
 
 struct ControllerFactoryImpl: ControllerFactory {
+    func makeInfo() -> (viewModel: InfoModel, controller: InfoViewController) {
+        let viewModel = InfoModel()
+        let controller = InfoViewController(viewModel: viewModel)
+        return (viewModel, controller)
+    }
+    
     func makeFunnyPicture() -> (viewModel: FunnyPictureModel, controller: FunnyPictureViewController) {
         let viewModel = FunnyPictureModel()
         let controller = FunnyPictureViewController(viewModel: viewModel)
