@@ -9,14 +9,18 @@
 import Foundation
 
 protocol InfoViewOutput {
-    func getLabelTextFromJSONSerialization(complition: @escaping(String) -> Void)
+    var residentsArray: [String] { get set }
     
+    func getLabelTextFromJSONSerialization(complition: @escaping(String) -> Void)
     func getLabelTextFromJSONDecoding(complition: @escaping(String) -> Void)
+    func getResidentDataFromJSONDecoding(urlText: String, complition: @escaping(String) -> Void)
 }
 
 // Слой бизнес-логики или МОДЕЛЬ
 
 final class InfoModel: InfoViewOutput {
+    
+    var residentsArray: [String] = []
     
     func getLabelTextFromJSONSerialization(complition: @escaping (String) -> Void) {
         
@@ -61,6 +65,11 @@ final class InfoModel: InfoViewOutput {
             do {
                 // MARK: - 2.3
                 let json = try JSONDecoder().decode(Planet.self, from: data)
+                if self.residentsArray.isEmpty {
+                    
+                    // MARK: - 3.8
+                    self.residentsArray = json.residents
+                }
                 complition(json.orbitalPeriod)
             } catch {
                 print(error.localizedDescription)
@@ -68,4 +77,24 @@ final class InfoModel: InfoViewOutput {
         }.resume()
     }
     
+    func getResidentDataFromJSONDecoding(urlText: String, complition: @escaping (String) -> Void) {
+        
+        guard let url3 = URL(string: urlText) else {
+            
+            print("URL Error")
+            return
+        }
+        
+        // MARK: - 3.7
+        URLSession.shared.dataTask(with: url3) { (data, response, error) in
+            guard let data = data else { return }
+            
+            do {
+                let json = try JSONDecoder().decode(Resident.self, from: data)
+                complition(json.name)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
 }

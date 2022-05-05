@@ -61,6 +61,7 @@
 		8C7B16162823A8D4008CA28D /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B16152823A8D4008CA28D /* InfoCoordinator.swift */; };
 		8C7B16192823AA2F008CA28D /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B16182823AA2F008CA28D /* InfoModel.swift */; };
 		8C7B161D2823DA5D008CA28D /* JSONModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B161C2823DA5D008CA28D /* JSONModels.swift */; };
+		8C7B161F28242A02008CA28D /* ResidentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B161E28242A02008CA28D /* ResidentsTableViewCell.swift */; };
 		8C87D61D26A9988800439C3E /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D61C26A9988800439C3E /* FeedCoordinator.swift */; };
 		8C87D61F26B165A000439C3E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D61E26B165A000439C3E /* LoginCoordinator.swift */; };
 		8C87D62126B17F9A00439C3E /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87D62026B17F9A00439C3E /* ControllerFactory.swift */; };
@@ -162,6 +163,7 @@
 		8C7B16152823A8D4008CA28D /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		8C7B16182823AA2F008CA28D /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		8C7B161C2823DA5D008CA28D /* JSONModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModels.swift; sourceTree = "<group>"; };
+		8C7B161E28242A02008CA28D /* ResidentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentsTableViewCell.swift; sourceTree = "<group>"; };
 		8C87D61C26A9988800439C3E /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		8C87D61E26B165A000439C3E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		8C87D62026B17F9A00439C3E /* ControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerFactory.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				8C7B16182823AA2F008CA28D /* InfoModel.swift */,
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
+				8C7B161E28242A02008CA28D /* ResidentsTableViewCell.swift */,
 			);
 			path = InfoModule;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				8C0542CE27C6B60200C439D2 /* VoiceRecorderModel.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				8C515F92260F5186000BE417 /* ProfileTableHeaderView.swift in Sources */,
+				8C7B161F28242A02008CA28D /* ResidentsTableViewCell.swift in Sources */,
 				8C2E8CD6266FA83800371B29 /* ProfileAsyncProcessor.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
 				8C1A88B0269B35970043AEF3 /* Coordonator.swift in Sources */,

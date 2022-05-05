@@ -20,7 +20,7 @@ struct Todos: Codable {
     }
 }
 
-// MARK: - 2.1
+// MARK: - 2.1 & 3.1
 struct Planet: Decodable {
     let name, rotationPeriod, orbitalPeriod, diameter: String
     let climate, gravity, terrain, surfaceWater: String
@@ -38,4 +38,9 @@ struct Planet: Decodable {
         case surfaceWater = "surface_water"
         case population, residents, films, created, edited, url
     }
+}
+
+// MARK: - 3.6
+struct Resident: Codable {
+    let name: String
 }
