@@ -8,11 +8,8 @@
 
 import Foundation
 
-// MARK: - 2
 enum AppConfiguration: String, CaseIterable {
     
-    
-    // MARK: - 4
     case people8 = "https://swapi.dev/api/people/7"
     case starship3 = "https://swapi.dev/api/starships/2"
     case planet5 = "https://swapi.dev/api/planets/4"
@@ -20,7 +17,6 @@ enum AppConfiguration: String, CaseIterable {
 
 var appConfiguration: AppConfiguration? = nil
 
-// MARK: - 1
 struct NetworkService {
     
     public static func getData() {
@@ -37,17 +33,15 @@ struct NetworkService {
                     print("UNKNOWN ERROR")
                     return
                 }
-                // MARK: - 5.C
                 print("ERROR: \(error.localizedDescription)") // ERROR: The Internet connection appears to be offline.
                 return
             }
-            // MARK: - 5.A
             print("DATA: ")
+            
             if let data = data {
                 let str = String(decoding: data, as: UTF8.self)
                 print(str)
             }
-            // MARK: - 5.B
             print("RESPONSE ALL HEADERFIELDS: \(urlResponse.allHeaderFields as! [String: Any])")
             print("RESPONSE STATUS: \(urlResponse.statusCode)")
             
