@@ -23,6 +23,18 @@ class InfoViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let planetLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.text = ""
+        label.numberOfLines = 0
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     init(viewModel: InfoViewOutput) {
         self.viewModel = viewModel
@@ -37,29 +49,44 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        changeLabelFromJSON()
+        changeLabelsFromJSON()
     }
     
     private func setup() {
         view.backgroundColor = UIColor.white
 
-        view.addSubview(todosLabel)
+        view.addSubviews(
+            todosLabel,
+            planetLabel
+        )
         
         let constraints = [
             todosLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             todosLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             todosLabel.heightAnchor.constraint(equalToConstant: 150),
-            todosLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -20)
+            todosLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -20),
+            
+            planetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            planetLabel.centerYAnchor.constraint(equalTo: todosLabel.centerYAnchor, constant: 20),
+            planetLabel.heightAnchor.constraint(equalToConstant: 150),
+            planetLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -20)
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func changeLabelFromJSON() {
+    private func changeLabelsFromJSON() {
         // MARK: - 1.4
         viewModel.getLabelTextFromJSONSerialization { [weak self] (str) in
             DispatchQueue.main.async {
                 self?.todosLabel.text = str
+            }
+        }
+        
+        // MARK: - 2.4
+        viewModel.getLabelTextFromJSONDecoding { [weak self] (str) in
+            DispatchQueue.main.async {
+                self?.planetLabel.text = str
             }
         }
     }
